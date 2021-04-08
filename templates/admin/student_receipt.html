@@ -1,0 +1,80 @@
+{% load i18n static jazzmin admin_urls bootstrap4 %}
+{% bootstrap_css %}         {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Phiếu thu</title>
+    <style>
+        p {
+            margin-bottom: 0!important;
+        }
+    </style>
+    <script>
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+
+        $(document).ready(function () {
+            $(".currency").each(function () {
+                $(this).text(numberWithCommas($(this).text()))
+            });
+        })
+    </script>
+</head>
+<body style="padding: 20px 0">
+    <div class="container">
+        <h1 class="text-center">PHIẾU THU</h1>
+        <h4 class="text-center mt-3" style="font-size: 14px"><i>{% now 'd/m/Y' %}</i></h4>
+        <h4 class="text-center"><i>Mã hoá đơn: TQV-số {{ data.id }}</i></h4>
+        <div class="row">
+            <div class="col-6"><i>Họ và tên: {{ data.student.student_name }}</i></div>
+            <div class="col-6"><i>Số điện thoại: {{ data.student.user.phone }}</i></div>
+            <div class="col-6"><i>Email: {{ data.student.user.email }}</i></div>
+            <div class="col-6"><i>Ngày sinh: {% if  data.student.user.birth_day %}
+                {{ data.student.user.birth_day }}{% endif %}</i>
+            </div>
+            <div class="col-12"><i>Khoá học: {{ data.course }}</i></div>
+            <div class="col-6"><i class="currency">Học phí: {{ data.origin_amount }} VNĐ</i></div>
+{#            <div class="col-6"><i class="currency">Giảm giá: {{ data.discount_percent }}%</i></div>#}
+{#            <div class="col-6"><i class="currency"></i></div>#}
+            <div class="col-6"><i>Ngày hẹn: {% if data.plan_date%}{{ data.plan_date}}{% endif %}</i></div>
+            <div class="col-6"><i class="currency">Số tiền nộp: {{ data.paid_amount }} Đ</i></div>
+            <div class="col-6"><i>Ngày hoàn thành: {% if  data.completed_pay_date%}
+                {{ data.completed_pay_date }}{% endif %}</i>
+            </div>
+{#            <div class="col-6"><i class="currency">Còn lại: {{data.rest_amount}} </i></div>#}
+        </div>
+        <div class="row">
+            <div class="col-6 mt-3 text-center"><i><b>Người nộp tiền</b></i></div>
+            <div class="col-6 mt-3 text-center"><i><b>Người thu tiền</b></i></div>
+            <div class="col-6 text-center"><i>(Ký & ghi rõ họ tên)</i></div>
+            <div class="col-6 text-center"><i>(Ký & ghi rõ họ tên)</i></div>
+            <div class="col-6 text-center"><i></i></div>
+            <div class="col-6 text-center" style="margin-top: 100px; font-size: 18px"><i>{{ request.user.full_name }}</i></div>
+        </div>
+        <div style="margin-top: 50px; font-style: italic">
+            <div class="row">
+                <p> <b>Lưu ý: &nbsp;</b></p>
+            </div>
+            <div class="row">
+                <p> Phiếu thu là một phần không thể tách rời của hợp đồng, HV cần lưu lại phiếu thu gốc để giải quyết
+                trong mọi trường hợp.</p>
+            </div>
+            <div class="row">
+                <p> Phiếu thu không được cấp lại trong mọi trường hợp.</p>
+            </div>
+            <div class="row">
+                <p> Phiếu thu chỉ có giá trị khi có đầy đủ chữ ký, họ tên của người thu tiền và được đóng dấu.</p>
+            </div>
+            <div class="row">
+                <p> Quyền lợi chỉ được hoàn trả với điều kiện Học viên nộp đơn xin giúp quyền lợi(theo mẫu)
+                trong vòng <b>7 ngày</b> kể từ ngày đăng ký quyền lợi.
+                Mọi trường hợp rút quyền lợi quá hạn đều không được hoàn trả.</p>
+            </div>
+        </div>
+        </div>
+    </div>
+</body>
+</html>

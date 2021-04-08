@@ -1,0 +1,160 @@
+{% load i18n static jazzmin admin_urls %}
+{% load i18n static jazzmin admin_urls bootstrap4 %}
+{% bootstrap_css %}         {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+{{ form.media }}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+
+    <script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
+    <script>
+        let chartData = null;
+
+        function removeChartData() {
+            if (chartData) {
+                chartData.destroy()
+            }
+        }
+
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+        function stringToDate(str) {
+            let arrs = str.split('/')
+            let day = Number(arrs[0]);
+            let month = Number(arrs[1]) - 1;
+            let year = Number(arrs[2]);
+            return moment([year, month, day]).format('YYYY-MM-DD');
+        }
+
+        function display_chart() {
+            removeChartData();
+
+            let chart_type = "{{ chart_type }}";
+            let stepSize = 100
+            let title = "Biểu đồ"
+            let url = ""
+            if (chart_type === "REVENUE_CHART") {
+                url = "/admin/fetch-revenue-data"
+                stepSize = 10000000
+                title = "Thống kê doanh thu"
+            }
+            if (chart_type === "USER_CHART") {
+                url = "/admin/users-chart-data-api"
+                stepSize = 100
+                title = "Thống kê người dùng"
+            }
+            if (chart_type === "STUDY_SHIFT_CHART") {
+                url = "/admin/study-shift-chart-data-api"
+                stepSize = 1000
+                title = "Thống kê số buổi học"
+            }
+            if (chart_type === "STUDENT_CHART") {
+                url = "/admin/students-chart-data-api"
+                stepSize = 100
+                title = "Thống kê sinh viên"
+            }
+
+            var from_date = stringToDate($("#id_from_date").val());
+            var to_date = stringToDate($("#id_to_date").val());
+
+            url += '?from_date=' + from_date + '&to_date=' + to_date
+            $("#card-title").text(title);
+
+            $.ajax({
+                url: url,
+                dataType: 'json',
+                success: function (response) {
+                    if (response) {
+                        var datasets = response.datasets
+                        var labels = response.labels
+                        if (labels) {
+                            var data = {
+                                "labels": labels,
+                                "datasets": datasets,
+                                yAxisID: 0,
+                                xAxisID: 0
+                            };
+                            var ctx = $("#display-chart").get(0).getContext("2d");
+                            chartData = new Chart(ctx, {
+                                type: 'bar',
+                                data: data,
+                                showTooltips: false,
+                                options: {
+                                    responsive: true,
+                                    aspectRatio: 3,
+                                    scales: {
+                                        xAxes: [{
+                                            ticks: {
+                                                beginAtZero: true,
+                                            }
+                                        }],
+                                        yAxes: [{
+                                            ticks: {
+                                                beginAtZero: true,
+                                                stepSize: stepSize,
+                                                callback: function (label, index, labels) {
+                                                    return numberWithCommas(label);
+                                                }
+                                            },
+                                            scaleLabel: {
+                                                display: true,
+                                                {#labelString: '1K = 1000'#}
+                                            }
+                                        }]
+                                    }
+                                }
+                            });
+                        }
+                    }
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            display_chart();
+            $("#search").click(function () {
+               display_chart();
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="chart-container">
+    <div class="card">
+        <div class="card-header">
+            <h3 id="card-title" class="card-title">
+
+            </h3>
+{#            <form method="GET" action="/admin/chart/">#}
+{#                {% csrf_token %}#}
+            <input type="hidden" name="type" value="SEARCH">
+            <div class="row">
+                <div class="col-xs-12 col-sm-4">
+                    <span>Từ ngày:</span>
+                    {{ form.from_date }}
+                </div>
+                <div class="col-xs-12 col-sm-4">
+                    <span class="mt-2">Tới ngày:</span>
+                    {{ form.to_date }}
+                </div>
+                <div class="col-xs-12 col-sm-4 pt-4">
+                    <button id="search" class="btn btn-primary">Tìm kiếm</button>
+                </div>
+
+            </div>
+{#            </form>#}
+        </div><!-- /.card-header -->
+        <div class="card-body">
+            <canvas id="display-chart"></canvas>
+        </div><!-- /.card-body -->
+    </div>
+</div>
+</body>

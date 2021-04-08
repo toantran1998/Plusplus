@@ -1,0 +1,37 @@
+{% load i18n static jazzmin admin_urls bootstrap4 %}
+{% bootstrap_css %}         {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hợp Đồng</title>
+    <style>
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #FAFAFA;
+            font: 12pt "Tahoma";
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div id="content">
+        <p>Học Viện Anh Ngữ ODIN xin chào bạn {{ data.to_name }},</p>
+        <p>Xin thông báo hiện tại bạn đã nghỉ 02 buổi học của lớp {{ data.classes_name }}. Theo quy định của trung tâm,
+            nếu bạn nghỉ thêm 1 buổi nữa sẽ bị hủy CAM KẾT của Học viện Anh ngữ ODIN.</p>
+        <p>Vậy nên bạn vui lòng đi học đầy đủ, không được nghỉ thêm bất cứ buổi nào nữa. Chúng tôi sẽ theo dõi từng buổi học của bạn.
+            Trong trường hợp BẮT BUỘC nghỉ, bạn phải thông báo với Học viện Anh ngữ ODIN qua Hotline và email:</p>
+        <p>Hotline 01: 1900 588 803 – 102</p>
+        <p>Hotline 02: 024.2283.0555</p>
+        <p>Email: gochoctap.odin103tqv@gmail.com</p>
+        <p>Lưu ý: Bạn chỉ được liên hệ với chúng tôi qua 2 kênh trên.
+            Học viện Anh ngữ ODIN sẽ không chấp nhận bất kỳ một thông tin gì từ một bên thứ 3 (sales, giáo viên, học viên,...)</p>
+        <p>Cảm ơn bạn đã đồng hành cùng ODIN!</p>
+    </div>
+</div>
+</body>
+</html>

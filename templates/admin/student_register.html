@@ -1,0 +1,493 @@
+{% load i18n static jazzmin admin_urls bootstrap4 %}
+{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+<!-- Google Font: Source Sans Pro -->
+<!--<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">-->
+
+<link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+<link rel="stylesheet" href="{% static "login/style.css" %}">
+<link rel="stylesheet" href="{% static "vendor/fontawesome-free/css/all.min.css" %}">
+<!-- favicons -->
+<link rel="shortcut icon" href="{% static jazzmin_settings.site_logo %}" type="image/png">
+<link rel="icon" href="{% static jazzmin_settings.site_logo %}" sizes="32x32" type="image/png">
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    button:hover {
+        opacity: 0.8;
+    }
+
+    body {
+        background-color: #f1f1f1;
+    }
+
+    /* Mark input boxes that gets an error on validation: */
+    input.invalid, select.invalid {
+        background-color: #ffdddd;
+    }
+
+    /* Hide all steps by default: */
+    .tab {
+        display: none;
+    }
+
+    #prevBtn {
+        background-color: #bbbbbb;
+    }
+
+    /* Make circles that indicate the steps of the form: */
+    .step {
+        height: 15px;
+        width: 15px;
+        margin: 0 2px;
+        background-color: #bbbbbb;
+        border: none;
+        border-radius: 50%;
+        display: inline-block;
+        opacity: 0.5;
+    }
+
+    .step.active {
+        opacity: 1;
+    }
+
+    /* Mark the steps that are finished and valid: */
+    .step.finish {
+        background-color: #4CAF50;
+    }
+
+    .text-left {
+        text-align: left;
+    }
+
+</style>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"></script>
+<body>
+<div id="container" class="container">
+    <!-- FORM SECTION -->
+    <div class="row">
+        <!-- SIGN UP -->
+        <div class="col align-items-center flex-col sign-up">
+            <div class="form-wrapper align-items-center">
+                <div id="reset-form-input" class="form sign-up">
+                    <h1 class="text-center" style="margin-bottom: 30px"><b>Đăng ký tài khoản sinh viên</b></h1>
+                    {% if not form.is_success %}
+                        <form id="regForm" action="/student/register/" method="post">
+                            {% csrf_token %}
+                            {% if form.errors %}
+                                {% if form.full_name.errors %}
+                                    <div class="callout callout-danger">
+                                        <p>{{ form.full_name.label }}: {{ form.full_name.errors|join:', ' }}</p>
+                                    </div>
+                                {% endif %}
+
+                                {% if form.email.errors %}
+                                    <div class="callout callout-danger">
+                                        <p>{{ form.email.label }}: {{ form.email.errors|join:', ' }}</p>
+                                    </div>
+                                {% endif %}
+
+                                {% if form.non_field_errors %}
+                                    <div class="callout callout-danger">
+                                        {% for error in form.non_field_errors %}
+                                            <p>{{ error }}</p>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+
+                            {% endif %}
+                            <!-- One "tab" for each step in the form: -->
+                            <div class="tab">
+                                <h2><b>Thông tin sinh viên</b></h2>
+                                <div class="input-group">
+                                    <i class="fas fa-file-signature"></i>
+                                    {{ form.full_name }}
+                                </div>
+                                <div class="input-group">
+                                    <i class="fas fa-envelope"></i>
+                                    {{ form.email }}
+                                </div>
+                                <div class="input-group">
+                                    <i class="fas fa-phone"></i>
+                                    {{ form.phone }}
+                                </div>
+                                <div class="input-group">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    {{ form.address }}
+                                </div>
+                            </div>
+                            <div class="tab">
+                                <h2><b>Đăng ký học tập</b></h2>
+                                <div class="input-group">
+                                    <i class="fas fa-synagogue"></i>
+                                    {{ form.centre }}
+                                </div>
+                                <div class="input-group">
+                                    <i class="fas fa-clipboard-list"></i>
+                                    {{ form.course }}
+                                </div>
+                                <div class="input-group">
+                                    <i class="fas fa-archway"></i>
+                                    {{ form.classes }}
+                                </div>
+                                <div class="input-group">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    {{ form.study_schedule_select }}
+                                </div>
+{#                                <div class="input-group">#}
+{#                                    <i class="far fa-calendar"></i>#}
+{#                                    {{ form.free_day_in_week }}#}
+{#                                    <span>#}
+{#                                    <i style="font-size: 1rem; margin-top: 50px">Nhập các ngày bạn rảnh rỗi để chúng tôi có thể xếp lịch phù hợp cho bạn.#}
+{#                                        Ví dụ: 2,3,4,5,6,7</i>#}
+{#                                        </span>#}
+{#                                </div>#}
+
+                            </div>
+                            <div class="tab">
+                                <h2><b>Thanh toán</b></h2>
+                                Số tiền phải thanh toán:
+                                <span id="id_must_pay_amount" class="text-primary" style="margin-top: 5px">0</span>
+                                <div class="input-group">
+                                    <i class="fas fa-keyboard"></i>
+                                    {{ form.title }}
+                                </div>
+                                <div class="input-group">
+                                    <i class="fas fa-code"></i>
+                                    {{ form.transaction_id }}
+                                </div>
+                                <div class="input-group">
+                                    <i class="fas fa-money-bill"></i>
+                                    {{ form.amount }}
+                                </div>
+                                <div class="input-group">
+                                    <i class="fas fa-funnel-dollar"></i>
+                                    {{ form.payment_method }}
+                                </div>
+                                <div class="input-group">
+                                    <i class="fas fa-gift"></i>
+                                    {{ form.reward_code }}
+
+                                    <a href="#" id="btnSearchReward">
+                                        <i class="fas fa-hand-holding-usd"
+                                           style="position: absolute;left: 85%; float: right; width: 50px;" title="Áp dụng"></i>
+{#                                        <i class="fas fa-search"#}
+{#                                           style="position: absolute;left: 85%; float: right; width: 50px;"></i>#}
+                                    </a>
+                                </div>
+{#                                <button id="btnApplyReward" style="width: 20%; position: absolute; right: 5%; margin-top:-50px">Áp dụng</button>#}
+                                <span id="reward_error" class="text-danger" style="color: #bd2130"></span>
+                                <span id="reward_title" class="text-primary"></span>
+                                <span id="reward_info" class="text-primary"></span>
+                            </div>
+                            <div style="overflow:auto; margin-top: 55px">
+                                <div style="float:left; width: 47.5%">
+                                    <button type="button" id="prevBtn"
+                                            onclick="nextPrev(-1)">
+                                        Quay lại
+                                    </button>
+                                </div>
+                                <div style="float:right; width: 47.5%">
+                                    <button type="button" id="nextBtn"
+                                            onclick="nextPrev(1)">
+                                        Tiếp theo
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- Circles which indicates the steps of the form: -->
+                            <div id="regSteps" style="text-align:center;margin-top:30px;">
+                                <span class="step"></span>
+                                <span class="step"></span>
+                                <span class="step"></span>
+                            </div>
+                        </form>
+                    {% endif %}
+                    {% if form.is_success %}
+                        <div id="reset-success" class="mt-2">
+                            <p>{% trans "Quá trình gửi yêu cầu đăng ký tài khoản thành công. Chúng tôi sẽ tiến hành kiểm chứng toàn bộ thông tin bạn đã cung cấp. Kết quả sẽ được gửi tới địa chỉ email của bạn trong thời gian sớm nhất." %}</p>
+                            <div class="col-12 text-center mt-2">
+                                <a href="/admin/login/" class="">{% trans "Về màn hình đăng nhập" %}</a>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="row content-row">
+        <!-- SIGN IN CONTENT -->
+        <div class="col align-items-center flex-col">
+            <div class="text sign-in">
+            </div>
+            <div class="img sign-in">
+            </div>
+        </div>
+        <!-- END SIGN IN CONTENT -->
+        <!-- SIGN UP CONTENT -->
+        <div class="col align-items-center flex-col">
+            <div class="img sign-up">
+                <img src="{% static "login/assets/undraw_creative_team_r90h.svg" %}" alt="welcome">
+            </div>
+            <div class="text sign-up">
+                <h2>
+                    {{ jazzmin_settings.site_header }}
+                </h2>
+                <p>
+                    Hướng tới mục tiêu cải thiện ngôn ngữ tiếng Anh cho các bạn trẻ, ODIN English triển khai 3 chương
+                    trình học đáp ứng nhu cầu học tập của đối tượng học sinh, sinh viên.
+                    Các chương trình học tại đây bao gồm: New BBST, khóa học giao tiếp và luyện thi IELTS.
+                </p>
+                <br>
+                <p>New BBST – Từ giã dĩ vãng “mất gốc” tiếng Anh</p>
+                <p>Giao tiếp – Tự tin trò chuyện cùng Tây</p>
+                <p>Luyện thi IELTS – Đường tới đỉnh vinh quang</p>
+            </div>
+        </div>
+        <!-- END SIGN UP CONTENT -->
+    </div>
+    <!-- END CONTENT SECTION -->
+</div>
+<script>
+    const DAY_WEEK = ['', 'Thứ 2-5', 'Thứ 3-6', 'Thứ 4-7']
+    const STUDY_SHIFT = ['', 'Ca 1 (9h-10h30)', 'Ca 2 (14h-15h30)',
+        'Ca 3 (18h-19h30)', 'Ca 4 (19h30-21h)']
+    setTimeout(() => {
+        document.getElementById('container').classList.add('sign-up')
+    }, 200)
+
+    function getClassesByCentreAndCourse() {
+        $("#id_classes").empty();
+        $("#id_classes").append('<option value="" selected="">---Chọn lớp học---</option>');
+
+        $.ajax({
+            url: '/classes/list-by-centre-course/' +
+                '?centre=' + $("#id_centre").val()
+                + '&course='+ $("#id_course").val(),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            success: function (response) {
+                if (response.result === "success") {
+                    console.log("Classes:" + response.classes);
+                    var classes = JSON.parse(response.classes);
+                    for (let i=0; i< classes.length; i++) {
+                        let data = classes[i].fields;
+                        let classNameDisplay = data.name;
+                        let timeInfo = "({dayInWeek}, {schedule})";
+                        let dayInWeek = Number(data.day_in_week);
+                        var cls="normal"
+                        // Nếu là lớp chờ
+                        if (data.waiting_flag) {
+                            timeInfo = timeInfo.replace('{dayInWeek}', DAY_WEEK[dayInWeek]).replace(', {schedule}', '');
+                            cls="wait";
+                        }
+                        // Nếu không phải lớp chờ.
+                        else {
+                            let schedule = Number(data.study_shift_select);
+                            timeInfo = timeInfo.replace('{dayInWeek}', DAY_WEEK[dayInWeek]).replace('{schedule}', STUDY_SHIFT[schedule])
+                        }
+                        classNameDisplay =  data.name + ' ' + timeInfo;
+                        $("#id_classes").append('<option class=' + cls + ' value=' + classes[i].pk + '>' + classNameDisplay + '</option>');
+                    }
+
+                }
+            }
+        });
+    }
+
+    function disableOrEnableClasses() {
+        if ($("#id_centre").val() && $("#id_centre").val()) {
+            $("#id_classes").prop("disabled", false);
+        } else {
+            $("#id_classes").prop("disabled", true);
+        }
+
+    }
+
+    $(document).ready(function () {
+        $('#regForm').submit(function () {
+            {#$("#nextBtn").css("display", "none");#}
+            $("#prevBtn").css("display", "none");
+            $("#nextBtn").attr("disabled", true);
+            {#$("#prevBtn").attr("disabled", true);#}
+            $("#regSteps").css("display", "none");
+            $("#nextBtn").text("Đang xử lý...");
+        });
+
+        $("#btnSearchReward").click(function (e) {
+            {#e.preventDefault();#}
+            var reward_code = $("#id_reward_code").val().trim()
+            var course_id = $("#id_course").val()
+            $.ajax({
+                url: '/reward/detail/?reward_code=' + reward_code + '&course_id=' + course_id,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                success: function (response) {
+                    if (response.result === "success") {
+                        {#$("#reward_help_text").css("display", "block");#}
+                        $("#reward_error").css("display", "none");
+                        $("#reward_info").css("display", "block");
+                        $("#reward_title").css("display", "block");
+                        var reward = JSON.parse(response.reward)[0];
+                        $("#reward_title").text("Ưu đãi: " + reward.fields.title);
+                        if (reward.fields.type === 1)
+                            $("#reward_info").text("Giảm giá: " + reward.fields.discount_percent + "%");
+                        else if (reward.fields.type === 2)
+                            $("#reward_info").text("Quà tặng: %s" + reward.fields.gift + "%");
+                        $("#reward_info").html(
+                            $("#reward_info").text()
+                            + "<br>Hạn sử dụng: " + moment(reward.fields.start_date).format("DD/MM/YYYY")
+                            + " ~ " + moment(reward.fields.end_date).format("DD/MM/YYYY"));
+                    } else {
+                        {#$("#reward_help_text").css("display", "none");#}
+                        $("#reward_error").css("display", "block");
+                        $("#reward_info").css("display", "none");
+                        $("#reward_title").css("display", "none");
+                        $("#reward_error").text(response.message);
+                    }
+                }
+            });
+            fetchMustPayAmount();
+        });
+
+        $("#id_centre").on("change", function () {
+            disableOrEnableClasses();
+            getClassesByCentreAndCourse();
+        })
+
+        $("#id_course").on("change", function () {
+            disableOrEnableClasses();
+            getClassesByCentreAndCourse()
+        })
+
+        $("#id_classes").on("change", function () {
+            var $selectedOption = ($(this).children("option:selected"));
+            if ($selectedOption.hasClass("normal")) {
+                $("#id_study_schedule_select").parent().css("display", "none");
+            } else {
+                $("#id_study_schedule_select").parent().css("display", "block");
+            }
+        });
+    });
+
+    var currentTab = 0; // Current tab is set to be the first tab (0)
+    showTab(currentTab); // Display the current tab
+
+    function showTab(n) {
+        // This function will display the specified tab of the form...
+        var x = document.getElementsByClassName("tab");
+        x[n].style.display = "block";
+        //... and fix the Previous/Next buttons:
+        if (n === 0) {
+            document.getElementById("prevBtn").style.display = "none";
+        } else {
+            document.getElementById("prevBtn").style.display = "inline";
+        }
+        if (n === (x.length - 1)) {
+            document.getElementById("nextBtn").innerHTML = "Đăng ký";
+            {#Get số tiền cần phải trả#}
+            fetchMustPayAmount();
+        } else {
+            document.getElementById("nextBtn").innerHTML = "Tiếp theo";
+        }
+        //... and run a function that will display the correct step indicator:
+        fixStepIndicator(n)
+    }
+
+    function fetchMustPayAmount() {
+        $.ajax({
+            url: '/admin/get_must_pay_amount_api/' +
+                '?reward_code=' + $("#id_reward_code").val()
+                + '&shift_select='+ $("#id_study_schedule_select").val()
+                + '&course_id='+ $("#id_course").val(),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            success: function (response) {
+                if (response.result === "success") {
+                    let mustPayAmount = response.must_pay_amount;
+                    $("#id_must_pay_amount").text(mustPayAmount);
+                }
+
+            }
+        });
+    }
+
+    function nextPrev(n) {
+        $("#regForm .callout-danger").remove();
+        // This function will figure out which tab to display
+        var x = document.getElementsByClassName("tab");
+        // Exit the function if any field in the current tab is invalid:
+        if (n === 1 && !validateForm()) return false;
+        // Hide the current tab:
+        x[currentTab].style.display = "none";
+        // Increase or decrease the current tab by 1:
+        currentTab = currentTab + n;
+        // if you have reached the end of the form...
+        if (currentTab >= x.length) {
+            // ... the form gets submitted:
+            {#document.getElementById("regForm").submit();#}
+            $("#nextBtn").attr("type", "submit");
+            return false;
+        }
+        // Otherwise, display the correct tab:
+        showTab(currentTab);
+    }
+
+    function validateForm() {
+        // This function deals with validation of the form fields
+        var x, y, i, valid = true;
+        x = document.getElementsByClassName("tab");
+        y = x[currentTab].getElementsByTagName("input");
+        // A loop that checks every input field in the current tab:
+        for (i = 0; i < y.length; i++) {
+            // If a field is empty...
+            if (y[i].getAttribute('required') !== null && y[i].value === "") {
+                // add an "invalid" class to the field:
+                y[i].className += " invalid";
+                // and set the current valid status to false
+                valid = false;
+            }
+        }
+
+        z = x[currentTab].getElementsByTagName("select");
+        // A loop that checks every input field in the current tab:
+        for (i = 0; i < z.length; i++) {
+            // If a field is empty...
+            if (z[i].getAttribute('required') !== null && z[i].value === "") {
+                // add an "invalid" class to the field:
+                z[i].className += " invalid";
+                // and set the current valid status to false
+                valid = false;
+            }
+        }
+
+        // If the valid status is true, mark the step as finished and valid:
+        if (valid) {
+            document.getElementsByClassName("step")[currentTab].className += " finish";
+        }
+        return valid; // return the valid status
+    }
+
+    function fixStepIndicator(n) {
+        // This function removes the "active" class of all steps...
+        var i, x = document.getElementsByClassName("step");
+        for (i = 0; i < x.length; i++) {
+            x[i].className = x[i].className.replace(" active", "");
+        }
+        //... and adds the "active" class on the current step:
+        x[n].className += " active";
+    }
+</script>
+
+</body>
+</html>

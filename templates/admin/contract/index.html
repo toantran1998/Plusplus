@@ -1,0 +1,231 @@
+{% load i18n static jazzmin admin_urls bootstrap4 %}
+{% bootstrap_css %}         {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hợp đồng cam kết khóa học</title>
+    <link rel="stylesheet" href="{% static "css/contract.css" %}">
+    <script>
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+
+        const COURSES={
+            BBST: {name:'New BBST', des: 'Nắm được tối thiểu 85% kiến thức phát âm và ngữ pháp cơ bản'},
+            GT: {name:'Giao tiếp', des: 'Có thể trao đổi về các chủ đề quen thuộc với người nước ngoài'},
+            TO1: {name:'TO1', des: 'TOEIC 450'},
+            TO2: {name:'TO2', des: 'TOEIC 750'},
+            IE1: {name:'IE1', des: 'IELTS 3.5'},
+            IE2: {name:'IE2', des: 'IELTS 5.0'},
+            IE3: {name:'IE3', des: 'IELTS 6.5'},
+        }
+
+        {#$(document).ready(function () {#}
+        {#    course_code = '{{ data.course_code }}'#}
+        {#    course_arr = course_code.split("_");#}
+        {#    for (var i=0; i<course_arr.length; i++) {#}
+        {#        let course = COURSES[course_arr[i]];#}
+        {#        let content = "<tr><td>" + course.name + "</td><td>" + course.des + "</td></tr>"#}
+        {#        $('#course-table').append(content);#}
+        {#    }#}
+        {#})#}
+    </script>
+
+</head>
+<body style="padding: 20px 0">
+<div class="container">
+    <div id="content">
+        <div class="page">
+            <h5 class="text-center">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</h5>
+            <h5 class="text-center">Độc lập – Tự do – Hạnh phúc</h5>
+            <h2 class="text-center mt-5"><b>HỢP ĐỒNG CAM KẾT KHÓA HỌC {% now 'Y' %}</b></h2>
+            <p class="text-center mt-3">(Khóa học: {{ data.course_code }})</p>
+            <div class="col-12 mt-5">
+                <p>Căn cứ vào Luật Dân sự số 91/2015/QH13 ban hành ngày 24 tháng 11 năm 2015.</p>
+                <p>Hôm nay,&emsp;&emsp;<b>{% now 'd/m/Y' %}</b>&emsp;&emsp;chúng tôi gồm:</p>
+                <p>Căn cứ vào hóa đơn số: ĐT-1286</p>
+                <p><b>Bên A:</b></p>
+                <div class="row">
+                    <div class="col-3">
+                        <p>Học tên:</p>
+                        <p>Ngày sinh:</p>
+                        <p>Số điện thoại:</p>
+                        <p>Email:</p>
+                    </div>
+                    <div class="col-9">
+                        <p><i>{{ data.student.full_name }}</i></p>
+                        <p>{{ data.student.birth_day }}</p>
+                        <p>{{ data.student.phone }}</p>
+                        <p>{{ data.student.email }}</p>
+                    </div>
+                </div>
+                <p><b>Bên B: ODIN LANGUAGE ACADEMY</b></p>
+                <div class="row">
+                    <div class="col-3">
+                        <p>Địa chỉ:</p>
+                        <p>ĐT:</p>
+                        <p>Đại diện:</p>
+                        <p>Chức vụ:</p>
+                        <p>CMTND số:</p>
+                        <p>Cấp ngày:</p>
+                    </div>
+                    <div class="col-9">
+                        <p>1 Đông Tác, phường Kim Liên, quận Đống Đa, thành phố Hà Nội</p>
+                        <p>024 6267 5555</p>
+                        <p>ông Phan Long Hải</p>
+                        <p>trưởng phòng kinh doanh</p>
+                        <p>001098009452</p>
+                        <p>01/07/2016 tại Hà Nội</p>
+                    </div>
+                </div>
+                <p>Bên A có nhu cầu học Tiếng Anh và đã được bên B tư vấn đầy đủ về khóa học và các điều kiện nhập học,
+                    hai bên cùng thống nhất ký Hợp đồng Cam kết khóa học với các điều khoản sau:</p>
+                <p><b>Điều 1: Trách nhiệm và quyền hạn của bên A</b></p>
+                <p>Bên A đã tham gia khóa học tại ODIN LANGUAGE ACADEMY và để được đảm bảo kết quả đầu ra, học viên có
+                    các quyền lợi và trách nhiệm dưới đây:</p>
+                <p>1. Học viên được xây dựng rõ lộ trình học phù hợp với trình độ.</p>
+                <p>2. Học viên được giáo viên thường xuyên kiểm tra, nhận xét và đánh giá định kỳ.</p>
+                <p>3. Học viên được bổ trợ kiến thức bởi các trợ giảng (nếu cần thiết để đảm bảo theo kịp tiến độ lớp
+                    học) theo thời gian thoả thuận giữa 2 bên.</p>
+                <p>4. Học viên được quyền bảo lưu khoá học tối đa 02 lần như sau:</p>
+                <p>- 1 lần không quá 01 tháng (không mất phí) trong trường hợp học viên cần học quân sự (có thông báo
+                    chính thức của trường) hoặc vì lí do sức khoẻ (có giấy nhập và xuất viện)</p>
+                <p>- 1 lần không quá 06 tháng (mất phí 1.000.000 vnđ)</p>
+                <p>- Học viên cam kết KHÔNG ĐƯỢC PHÉP lôi kéo bạn học cùng lớp bảo lưu trong mọi trường hợp. Nếu bị phát
+                    hiện, ODIN LANGUAGE ACADEMY có quyền chấm dứt đào tạo và không hoàn lại học phí.</p>
+                <p>- Trong mọi trường hợp Học viên không được phép bảo lưu quá 06 tháng. Khi hết thời hạn bảo lưu, ODIN
+                    LANGUAGE ACADEMY sẽ thực hiện xếp lớp tối đa 03 lần. Sau 03 lần xếp lớp mà học viên cố tình không
+                    quay lại học, ODIN LANGUAGE ACADEMY có quyền chấm dứt đào tạo và không hoàn lại học phí.</p>
+                <p>- Khi quay lại sau bảo lưu, Học viên sẽ thực hiện bài kiểm tra năng lực theo yêu cầu. Trong trường
+                    hợp năng lực của Học viên không đạt trình độ tương đương với trước khi bảo lưu, Học viên cần đóng
+                    học phí tương đương với khóa học cần bổ sung tại thời điểm quay lai để học lại trình độ bị mất.</p>
+            </div>
+        </div>
+        <div class="page">
+            <p>5. Học viên phải học theo đúng lộ trình, giáo trình và sự hướng dẫn của giáo viên. Hoàn thành đầy
+                đủ bài tập về nhà theo đúng thời hạn. (Lưu ý: Hợp đồng cam kết sẽ hết hiệu lực ngay khi Học viên
+                không hoàn thành bài tập và có xác nhận của giáo viên)</p>
+            <p>6. Học viên được phát giáo trình trong quá trình học, không tự ý mang giáo trình của ODIN LANGUAGE
+                ACADEMY
+                ra bên ngoài và không mang giáo trình không liên quan vào học.</p>
+            <p>7. Học viên được phép nghỉ học tối đa 03 buổi học /khoá học. (bao gồm cả có phép và không phép).
+                Trong trường hợp HV nghỉ có phép (có thông báo cho bộ phận chăm sóc học viên/ giáo viên thông qua
+                email/ điện thoại/ fanpage), Odin sẽ hỗ trợ gửi tài liệu, hỗ trợ GV giải thích lại nội dung của buổi
+                nghỉ có phép.
+                Trong trường hợp HV nghỉ mà không có sự thông báo với bộ phận chăm sóc học viên, Odin không có trách
+                nhiệm trong việc bù lại kiến thức của buổi nghỉ.</p>
+            <p>8. Học viên tham gia các bài kiểm tra định kì theo yêu cầu của giáo viên.</p>
+            <p>9.Thái độ luôn hợp tác để ODIN LANGUAGE ACADEMY không phải triệu tập Phụ huynh/ Học viên để trao đổi
+                quá 03 lần. Học viên không được phép có các hành vi, tác động gây ảnh hưởng tiêu cực tới hoạt động học
+                tập chung của cả lớp. Trong trường hợp bị triệu tập/ gửi thông báo về vấn đề gây ảnh hưởng tới lớp học
+                (kèm phiếu xác nhận của các bạn trong lớp) 3 lần, ODIN LANGUAGE ACADEMY có quyền chấm dứt đào tạo và
+                không hoàn lại học phí.</p>
+            <p>10. Học viên tham dự kì thi quốc tế sau khi kết thúc khóa học tối đa 02 tuần.</p>
+            <p>11. Học viên hoàn thành học phí theo đúng quy định và đúng thời hạn (thể hiện bằng phiếu thu):</p>
+            <p>Lưu ý: Phiếu thu là một phần đính kèm không thể tách rời của hợp đồng, HV cần lưu lại phiếu thu gốc
+                để được giải quyết mọi trường hợp.</p>
+            <p>&emsp;Phiếu thu KHÔNG được cấp lại trong mọi trường hợp.</p>
+            <p>&emsp;Phiếu thu chỉ có giá trị khi có đầy đủ chữ kí, họ tên của người thu tiền và được đóng dấu.</p>
+            <div class="row">
+                <div class="col-7">
+                    <p>&emsp;Thời gian hoàn thành học phí không quá ngày:</p>
+                    <p>&emsp;Tổng học phí cần hoàn thành (viết bằng số):</p>
+                </div>
+                <div class="col-5">
+                    <p class="text-center"><b>{{ data.plan_date }}</b></p>
+                    <p class="text-center"><b>{{ data.must_pay_amount }}</b></p>
+                </div>
+            </div>
+            <p>Nếu vi phạm quyền lợi và trách nhiệm nêu trên, bên A đồng ý cho bên B - ODIN LANGUAGE ACADEMY không còn
+                trách nhiệm đảm bảo đầu ra cho bên A sau khi hoàn thành khóa học này.</p>
+            <p>
+                12. Học viên cam kết trao đổi trực tiếp, thẳng thắn với bộ phận chăm sóc học viên khi xảy ra các vấn
+                đề/ thắc mắc về thông tin lớp học. Mọi thông tin trao đổi chỉ được công nhận và xử lý thông qua các
+                kênh:
+                email/ hotline/ fanpage (thông tin cụ thể từng địa điểm học được liệt kê trên phiếu thu đính kèm hợp
+                đồng)
+                hoặc trực tiếp tại Odin. Ngoài ra, toàn bộ thông tin đến từ bên thứ 3 ngoài bộ phận chăm sóc học viên
+                (bao gồm nhưng không giới hạn: nhân viên kinh doanh, giáo viên,....) sẽ không được sử dụng như thông tin
+                chính thống trong việc giải quyết giữa 2 bên.
+            </p>
+            <p><b>Điều 2: Trách nhiệm và quyền hạn của bên B - ODIN LANGUAGE ACADEMY</b></p>
+            <p>ODIN LANGUAGE ACADEMY xin cam kết:</p>
+            <p>1. Đảm bảo đầu ra theo từng khoá học cho học viên, cụ thể như sau:</p>
+            <div style="padding: 0 10%">
+                <table id="course-table" style="width:100%">
+                    <tr>
+                        <th width="30%"><b>Khoá học</b></th>
+                        <th width="70%"><b>Đầu ra</b></th>
+                    </tr>
+{#                    <tr>#}
+{#                        <td width="30%">{{ data.course.code }}</td>#}
+{#                        <td width="70%">{{ data.course.name }}</td>#}
+{#                    </tr>#}
+                        {{ data.course_info }}
+                </table>
+            </div>
+            <p>2. Đảm bảo cung cấp tài liệu luyện tập cho học viên.</p>
+            <p>3. Theo dõi, hướng dẫn, động viên và nhắc nhở học viên trong suốt quá trình học.</p>
+            <p>4. Thông báo tình hình học tập của học viên dưới 18 tuổi cho phụ huynh.</p>
+            <p>5. Hỗ trợ đăng ký thi Quốc tế với Học viên đóng lệ phí thi tại ODIN LANGUAGE ACADEMY.</p>
+        </div>
+        <div class="page">
+            <p>6. Nếu học viên thực hiện đúng tất cả những điều trong bản cam kết này và đi thi theo quy định nhưng kết
+                quả chưa đạt mức cam kết trên, ODIN LANGUAGE ACADEMY phải có trách nhiệm tiếp tục đào tạo miễn phí cho
+                tới
+                khi học viên đạt mức điểm cam kết. Học viên phải ký Cam kết đào tạo lại theo quy định</p>
+            <p>7. Nếu học viên vi phạm một trong những quy định tại Điều 1, ODIN LANGUAGE ACADEMY không đảm bảo điểm đầu
+                ra nhưng vẫn tiếp tục giảng dạy và hỗ trợ học viên tối đa nhằm giúp học viên đạt được mức điểm thi cao
+                nhất.</p>
+            <p><b>Điều 3: Hoàn trả học phí</b></p>
+            <p>ODIN LANGUAGE ACADEMY không hoàn trả học phí ngoại trừ các trường hợp dưới đây:</p>
+            <p>1. ODIN LANGUAGE ACADEMY dừng hoạt động</p>
+            <p>2.ODIN LANGUAGE ACADEMY chuyển địa điểm đến địa điểm mới cách xa quá 10km so với địa điểm cũ. Học phí
+                được hoàn trả theo tỉ lệ như sau:</p>
+            <div style="padding: 0 5%">
+                <table>
+                    <th>
+                        <tr>
+                            <td width="50%"><b>Thời gian</b></td>
+                            <td width="50%"><b>Học phí được hoàn trả</b></td>
+                        </tr>
+                    </th>
+                    <tr>
+                        <td>Trước khi bắt đầu khóa học</td>
+                        <td>100% học phí – 1.000.000 phí quản lý</td>
+                    </tr>
+                    <tr>
+                        <td>Đã học 1-24% tổng số giờ học</td>
+                        <td>65% học phí còn lại</td>
+                    </tr>
+                    <tr>
+                        <td>Đã học 25-49% tổng số giờ học</td>
+                        <td>35% học phí còn lại</td>
+                    </tr>
+                    <tr>
+                        <td>Đã học 50 – 74% tổng số giờ học</td>
+                        <td>15% học phí còn lại</td>
+                    </tr>
+                    <tr>
+                        <td>Đã học 75% tổng số giờ học trở lên</td>
+                        <td>0% học phí còn lại</td>
+                    </tr>
+                </table>
+            </div>
+            <p>Chính sách trên chỉ áp dụng cho học viên đóng học phí 100% theo bảng học phí. Giấy cam kết này
+                gồm 03 trang in thành 02 bản, mỗi bên giữ 01 bản có giá trị như nhau.</p>
+            <div class="row">
+                <div class="col-6 mt-3 text-center"><b>Học viên</b></div>
+                <div class="col-6 mt-3 text-center"><b>Đại diện học viên</b></div>
+                <div class="col-6 text-center">(Ký & ghi rõ họ tên)</div>
+                <div class="col-6 text-center">(Ký & ghi rõ họ tên)</div>
+                <div class="col-6 text-center"><i></i></div>
+                <div class="col-6 text-center" style="margin-top: 100px; font-size: 18px"><i>{{ request.user.full_name }}</i></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static jazzmin admin_urls %}
+{% block content %}
+    <h3>Việc cần làm</h3>
+    <br><br>
+    <!-- Nav pills -->
+    <ul class="nav nav-tabs col-12 mt-2" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="pill" href="#studentOffYesterday">HV hôm qua nghỉ học</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="pill" href="#studentOffOverTwoDays">HV nghỉ từ 2 buổi</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="pill" href="#studentLostConfirm">HV mất cam kết</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="pill" href="#studentPaymentDeadline">HV đến hạn nộp tiền</a>
+        </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content col-sm-12">
+        <div id="studentOffYesterday" class="container tab-pane active"><br>
+            <h5>HV hôm qua nghỉ học</h5>
+            <iframe class="col-12" style="min-height: 70vh"
+                    src="/admin/task-student-list/?type=STUDENT_OFF_YESTERDAY">
+            </iframe>
+        </div>
+        <div id="studentOffOverTwoDays" class="container tab-pane fade"><br>
+            <h5>HV nghỉ từ 2 buổi</h5>
+            <iframe class="col-12" style="min-height: 70vh"
+                    src="/admin/task-student-list/?type=STUDENT_OFF_OVER_TWO_DAYS">
+            </iframe>
+        </div>
+        <div id="studentLostConfirm" class="container tab-pane fade"><br>
+            <h5>HV mất cam kết</h5>
+            <iframe class="col-12" style="min-height: 70vh"
+                    src="/admin/task-student-list/?type=STUDENT_LOST_CONFIRM">
+            </iframe>
+        </div>
+        <div id="studentPaymentDeadline" class="container tab-pane fade"><br>
+                <h5>HV quá hạn thanh toán hoặc sắp đến hạn thanh toán</h5>
+                <iframe class="col-12" style="min-height: 70vh"
+                        src="/admin/task-student-list/?type=STUDENT_PAYMENT_DEADLINE">
+                </iframe>
+            </div>
+        </div>
+{% endblock %}

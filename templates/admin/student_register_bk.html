@@ -1,0 +1,170 @@
+{% extends "admin/base_account.html" %}
+{% load i18n static jazzmin admin_urls bootstrap4 %}
+{% bootstrap_css %}         {# Embed Bootstrap CSS #}
+{% block extrastyle %}
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="{% static "vendor/fontawesome-free/css/all.min.css" %}">
+    <!-- Bootstrap and adminLTE -->
+    <link rel="stylesheet" href="{% static "vendor/adminlte/css/adminlte.min.css" %}">
+    <link rel="stylesheet" href="{% static "login/style.css" %}">
+{% endblock %}
+{% block extrascript %}
+    <script>
+        $(document).ready(function () {
+            $('#studentRegisterForm').submit(function() {
+                $("#btnRegisterStudent").css("display", "none");
+                $("#btnRegisterStudent").removeClass("btn-primary").addClass("btn-default");
+                $("#btnRegisterLoading").css("display", "inline-block");
+            });
+
+            $("#id_reward_code").keydown(function (e) {
+                if (e.key === 'Enter' || e.keyCode === 13) {
+                    e.preventDefault();
+                    var reward_code = $(this).val().trim()
+                    var course_id = $("#id_course").val()
+                    $.ajax({
+                        url: '/reward/detail/?reward_code=' + reward_code + '&course_id=' + course_id,
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        success: function (response) {
+                            if (response.result==="success") {
+                                $("#reward_help_text").css("display", "block");
+                                $("#reward_error").css("display", "none");
+                                $("#reward_info").css("display", "block");
+                                $("#reward_title").css("display", "block");
+                                var reward =JSON.parse(response.reward)[0];
+                                $("#reward_title").text("Ưu đãi: " + reward.fields.title);
+                                if (reward.fields.type === 1)
+                                    $("#reward_info").text("Giảm giá: " + reward.fields.discount_percent + "%");
+                                else if (reward.fields.type === 2)
+                                    $("#reward_info").text("Quà tặng: %s" + reward.fields.gift + "%");
+                            } else {
+                                $("#reward_help_text").css("display", "none");
+                                $("#reward_error").css("display", "block");
+                                $("#reward_info").css("display", "none");
+                                $("#reward_title").css("display", "none");
+                                $("#reward_error").text(response.message);
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+{% endblock %}
+{% block content %}
+    <div class="">
+        <div class="col-8" style="margin: 15% auto">
+{#            <div class="login-logo">#}
+{#                <a href="{% url 'admin:index' %}">#}
+{#                    <b>{{ jazzmin_settings.site_header }}</b>#}
+{#                </a>#}
+{#            </div>#}
+        <h2 class="text-center"><b>Đăng ký tài khoản sinh viên</b></h2>
+            <div class="card">
+                <div class="card-body login-card-body">
+                    {% if not form.is_success %}
+                        <form id="studentRegisterForm" action="/student/register/" method="post">
+                            {% csrf_token %}
+                            {% if form.errors %}
+                                {% if form.full_name.errors %}
+                                    <div class="callout callout-danger">
+                                        <p>{{ form.full_name.label }}: {{ form.full_name.errors|join:', ' }}</p>
+                                    </div>
+                                {% endif %}
+
+                                {% if form.email.errors %}
+                                    <div class="callout callout-danger">
+                                        <p>{{ form.email.label }}: {{ form.email.errors|join:', ' }}</p>
+                                    </div>
+                                {% endif %}
+
+                                {% if form.non_field_errors %}
+                                    <div class="callout callout-danger">
+                                        {% for error in form.non_field_errors %}
+                                            <p>{{ error }}</p>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+
+                            {% endif %}
+                            <div class="student-info mt-4">
+                                <h6><b>Thông tin sinh viên</b></h6>
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12 mt-2">{{ form.full_name }}</div>
+                                    <div class="col-sm-6 col-xs-12 mt-2">{{ form.phone }}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12 mt-2">{{ form.email }}</div>
+                                    <div class="col-sm-6 col-xs-12 mt-2">{{ form.address }}</div>
+                                </div>
+                            </div>
+                            <div class="register-study mt-4">
+                                <h6><b>Đăng ký học tập</b></h6>
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12 mt-2">{{ form.centre }}</div>
+                                    <div class="col-sm-6 col-xs-12 mt-2">{{ form.course }}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12 mt-2">{{ form.study_schedule_select }}</div>
+                                    <div class="col-sm-6 col-xs-12 mt-2">
+                                        {{ form.free_day_in_week }}
+                                        <span id="reward_help_text">
+                                            <i>Nhập các ngày bạn rảnh rỗi để chúng tôi có thể xếp lịch phù hợp cho bạn. Ví dụ: 2,3,4,5,6,7</i>
+                                        </span>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="amount-info mt-4">
+                                <h6><b>Thanh toán</b></h6>
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12 mt-2">{{ form.title }}</div>
+                                    <div class="col-sm-6 col-xs-12 mt-2">{{ form.amount }}</div>
+                                </div>
+                            </div>
+                            <div class="amount-info mt-4">
+                                <h6><b>Ưu đãi</b></h6>
+                                <div class="row">
+                                    <div class="col-sm-12 col-xs-12 mt-2">
+                                        {{ form.reward_code }}
+                                        <span id="reward_help_text"><i>Nhập mã ưu đãi rồi nhấn Enter để xem thông tin ưu đãi</i></span>
+                                        <span id="reward_error" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-sm-12 col-xs-12">
+                                        <span id="reward_title" class="text-primary"></span>
+                                        <span id="reward_info" class="text-primary"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-12 text-center">
+                                    <div style="display: none" id="btnRegisterLoading"
+                                         class="spinner-border text-primary text-center" role="status">
+                                    </div>
+                                    <button type="submit" id="btnRegisterStudent"
+                                            class="btn btn-primary btn-block">{% trans "Đăng ký" %}</button>
+
+                                </div>
+                            </div>
+                            <div class="col-12 text-center mt-2">
+                                Bạn đã có tài khoản? <a href="/admin/login/" class="">{% trans "Đăng nhập" %}</a>
+                            </div>
+                        </form>
+                    {% endif %}
+                    {% if form.is_success %}
+                        <div id="reset-success" class="mt-2">
+                            <p>{% trans "Quá trình gửi yêu cầu thanh toán thành công. Chúng tôi sẽ tiến hành kiểm chứng toàn bộ thông tin bạn đã cung cấp. Kết quả sẽ được gửi tới địa chỉ email của bạn trong thời gian sớm nhất." %}</p>
+                            <div class="col-12 text-center mt-2">
+                                <a href="/admin/login/" class="">{% trans "Về màn hình đăng nhập" %}</a>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

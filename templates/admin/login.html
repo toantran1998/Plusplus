@@ -1,0 +1,135 @@
+{% extends "admin/base_account.html" %}
+{% load i18n static jazzmin admin_urls bootstrap4 %}
+{% block extrastyle %}
+
+{% endblock %}
+{% block content %}
+<div id="container" class="container">
+    <!-- FORM SECTION -->
+    <div class="row">
+        <!-- SIGN UP -->
+        <div class="col align-items-center flex-col sign-up">
+
+        </div>
+        <!-- END SIGN UP -->
+        <!-- SIGN IN -->
+        <div class="col align-items-center flex-col sign-in">
+            <div class="form-wrapper align-items-center">
+                <div class="form sign-in">
+                    <form action="{{ app_path }}" method="post">
+                        {% csrf_token %}
+                        {% if form.errors %}
+
+                            {% if form.username.errors %}
+                                <div class="callout callout-danger">
+                                    <p>{{ form.username.label }}: {{ form.username.errors|join:', ' }}</p>
+                                </div>
+                            {% endif %}
+
+                            {% if form.password.errors %}
+                                <div class="callout callout-danger">
+                                    <p>{{ form.password.label }}: {{ form.password.errors|join:', ' }}</p>
+                                </div>
+                            {% endif %}
+
+                            {% if form.non_field_errors %}
+                                <div class="callout callout-danger">
+                                    {% for error in form.non_field_errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+
+                        {% endif %}
+                        <div class="input-group mb-3">
+                            <i class='bx bxs-user'></i>
+                            <input type="text" name="username" class="form-control"
+                                   placeholder="Tên đăng nhập" required>
+                        </div>
+                        <div class="input-group mb-1">
+                            <i class='bx bxs-lock-alt'></i>
+                            <input type="password" name="password" class="form-control"
+                                   placeholder="Mật khẩu" required>
+                        </div>
+{#                        <div class="row">#}
+{#                            <div class="col-12 text-right mb-2">#}
+{#                                <a href="/admin/password_reset/" class="">{% trans "Quên mật khẩu?" %}</a>#}
+{#                            </div>#}
+{#                        </div>#}
+                        <button type="submit">{% trans "Đăng nhập" %}</button>
+                        <p>
+                            <a href="/admin/password_reset/" class=""><b>{% trans "Quên mật khẩu?" %}</b></a>
+                        </p>
+                        <p>
+                            <span>
+                                Bạn chưa có tài khoản?
+                            </span>
+                            <b onclick="toggle()" class="pointer">
+                                <a href="{% url 'student_register' %}" class="">{% trans "Đăng ký ngay" %}</a>
+                            </b>
+                        </p>
+                    </form>
+                </div>
+            </div>
+            <div class="form-wrapper">
+                <div class="social-list align-items-center sign-in">
+                    <div class="align-items-center facebook-bg">
+                        <i class='bx bxl-facebook'></i>
+                    </div>
+                    <div class="align-items-center google-bg">
+                        <i class='bx bxl-google'></i>
+                    </div>
+                    <div class="align-items-center twitter-bg">
+                        <i class='bx bxl-twitter'></i>
+                    </div>
+                    <div class="align-items-center insta-bg">
+                        <i class='bx bxl-instagram-alt'></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END SIGN IN -->
+    </div>
+    <!-- END FORM SECTION -->
+    <!-- CONTENT SECTION -->
+    <div class="row content-row">
+        <!-- SIGN IN CONTENT -->
+        <div class="col align-items-center flex-col">
+            <div class="text sign-in">
+                <h2>
+                    {{ jazzmin_settings.site_header }}
+                </h2>
+                <p>
+                    Địa chỉ: P502 - CC Vinaconex 3 Tòa 15T1, 310 Minh Khai, Hai Bà Trưng, Hà Nội<br>
+                    Hotline: 03.27.28.25.26<br>
+                    Email: plusplus.academy@gmail.com<br>
+                    Facebook: fb.com/plusplus.vn<br>
+                </p>
+            </div>
+            <div class="img sign-in">
+                <img src="{% static "login/assets/undraw_different_love_a3rg.svg" %}" alt="welcome" style="border-radius: 50%; margin-top: -50px">
+            </div>
+        </div>
+        <!-- END SIGN IN CONTENT -->
+        <!-- SIGN UP CONTENT -->
+        <div class="col align-items-center flex-col">
+            <div class="img sign-up">
+                <img src="{% static "login/assets/undraw_creative_team_r90h.svg" %}" alt="welcome">
+            </div>
+            <div class="text sign-up">
+                <h2>
+                    Join with us
+                </h2>
+                <p>
+                    Với tôn chỉ: “STUDY LIKE GOD”, Odin Language Academy đang hoàn thành tốt sứ mệnh đem đến môi trường
+                    học bổ ích cho các sinh viên, trau dồi và rèn luyện kiến thức cũng như gia tăng trải nghiệm thực tế
+                    cho học viên trong quá trình học tiếng Anh của mình.
+                </p>
+            </div>
+        </div>
+        <!-- END SIGN UP CONTENT -->
+    </div>
+    <!-- END CONTENT SECTION -->
+</div>
+{% endblock %}
+<script src="{% static "login/index.js" %}"></script>

@@ -1,0 +1,57 @@
+{% load i18n static jazzmin admin_urls bootstrap4 %}
+{% bootstrap_css %}         {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Đăng ký tài khoản thành công</title>
+    <style>
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #FAFAFA;
+            font: 12pt "Tahoma";
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div id="content">
+        {# Trường hợp giáo viên #}
+        {% if data.groups.id == 4 %}
+            <p>Học Viện Anh Ngữ ODIN xin chào quý thầy cô {{ data.full_name }},</p>
+            <p>Chúng tôi xin thông báo tài khoản của thầy/cô đã đăng ký thành công trên hệ thống quản lý của Odin.</p>
+            <p>Dưới đây là thông tin tài khoản của thầy/cô:</p>
+            <p>Username: {{ data.username }}</p>
+            <p>Password: {{ data.password }}</p>
+            <p>Quý thầy/cô vui lòng đăng nhập tài khoản theo đường dẫn sau:
+                {{ data.login_url }}
+            </p>
+            <p>Mọi thắc mắc xin liên hệ Hotline:</p>
+            <p>Hotline 01: 1900 588 803 – 102</p>
+            <p>Hotline 02: 024.2283.0555</p>
+            <p>Email: gochoctap.odin103tqv@gmail.com</p>
+            <p>Cảm ơn thầy/cô đã đồng hành cùng ODIN!</p>
+        {% else %}
+            <p>Học Viện Anh Ngữ ODIN xin chào bạn {{ data.full_name }},</p>
+            <p>Chúng tôi xin thông báo tài khoản của bạn đã đăng ký thành công trên hệ thống quản lý của Odin.</p>
+            <p>Dưới đây là thông tin tài khoản của bạn:
+            <p>Username: {{ data.username }}</p>
+            <p>Password: {{ data.password }}
+            </p>
+            <p>Bạn vui lòng đăng nhập tài khoản theo đường dẫn sau:
+                {{ data.login_url }}
+            </p>
+            <p>Mọi thắc mắc xin liên hệ Hotline:</p>
+            <p>Hotline 01: 1900 588 803 – 102</p>
+            <p>Hotline 02: 024.2283.0555</p>
+            <p>Email: gochoctap.odin103tqv@gmail.com</p>
+            <p>Cảm ơn bạn đã đồng hành cùng ODIN!</p>
+        {% endif %}
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+{% load i18n static jazzmin admin_urls bootstrap4 %}
+{% bootstrap_css %}         {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Đăng ký tài khoản thành công</title>
+    <style>
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #FAFAFA;
+            font: 12pt "Tahoma";
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div id="content">
+        <p>Học Viện Anh Ngữ ODIN xin chào bạn {{ data.full_name }},</p>
+        <p>Odin xin xác nhận thông tin thanh toán của Học viên như sau:</p>
+        <h3>THÔNG TIN HỌC PHÍ:</h3>
+        <p>Học viên: {{ data.full_name }}</p>
+        <p>Mã Khóa học: {{ data.course.code }}</p>
+        <p>Tên Khóa học: {{ data.course.name }}</p>
+        <p>Học phí: {{ data.must_pay_amount }}VNĐ</p>
+        <p>Số tiền đóng còn lại: {{ data.second_pay_amount }}VNĐ</p>
+        <p>Ngày đóng: {{ data.second_pay_date }}</p>
+    </div>
+</div>
+</body>
+</html>

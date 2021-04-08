@@ -1,0 +1,42 @@
+{% load i18n static jazzmin admin_urls bootstrap4 %}
+{% bootstrap_css %}         {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hợp Đồng</title>
+    <style>
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #FAFAFA;
+            font: 12pt "Tahoma";
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div id="content">
+        <p>Học Viện Anh Ngữ ODIN xin chào bạn {{ data.to_name }},</p>
+        <p>Xin thông báo, hiện lớp đã học đến buổi thứ {{ data.current_study_shift }}
+            nhưng bạn mới điểm danh được {{ data.attempt }}/{{ data.sum_study_shift }} buổi.</p>
+        <p>Bạn đã nghỉ {{ data.attendance }} buổi (bao gồm nghỉ có phép và không phép). Chi tiết như sau:</p>
+        <p>-	Khóa học đang học: {{ data.course_name }}</p>
+        <p>-	Lớp: {{ data.classes_name }}</p>
+        <p>-	Trung tâm: {{ data.centre }}</p>
+        <p>-	Các buổi bạn đã nghỉ: {{ data.study_shift_off }}</p>
+        <p>Theo nội quy trong hợp đồng đã ký kết:
+            <b>“Học viên được phép nghỉ học tối đa 03 buổi học /khoá học. (bao gồm cả có phép và không phép)”</b></p>
+        <p>Do nghỉ quá số buổi, nên bạn vui lòng qua Học viện gặp bộ phận lễ tân trung tâm {{ data.centre }} để làm thanh lý hợp đồng.</p>
+        <p>Mọi thắc mắc xin liên hệ Hotline:</p>
+        <p>Hotline 01: 1900 588 803 – 102</p>
+        <p>Hotline 02: 024.2283.0555</p>
+        <p>Email: gochoctap.odin103tqv@gmail.com</p>
+        <p>Cảm ơn bạn đã đồng hành cùng ODIN!</p>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+{% load i18n static jazzmin admin_urls bootstrap4 %}
+{% bootstrap_css %}         {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Phê duyệt thanh toán</title>
+    <style>
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #FAFAFA;
+            font: 12pt "Tahoma";
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div id="content">
+        <p>Học Viện Anh Ngữ ODIN xin chào bạn {{ data.full_name }},</p>
+        <p>Chúng tôi muốn thông báo với bạn rằng, yêu cầu thanh toán của bạn đã
+            được phê duyệt và cập nhật thành công vào hệ thống quản lý của ODIN.
+        <p>Thông tin thanh toán chi tiết như sau:</p>
+        <h3>THÔNG TIN HỌC PHÍ:</h3>
+        <p>Học viên	: {{ data.full_name }}</p>
+        <p>Mã Khóa học	: {{ data.course.code }}</p>
+        <p>Tên Khóa học	: {{ data.course.name }}</p>
+        <p>Học phí: {{ data.must_pay_amount }}NĐV</p>
+        <p>Số tiền đóng: {{ data.paid_amount }} VNĐ Ngày đóng: {{ data.send_date }}</p>
+        <p>Hóa đơn đã được đính kèm trong email này.</p>
+        <p>Nếu các bất kỳ thắc mắc gì bạn vui lòng liên hệ qua Hotline và email:</p>
+        <p>Hotline 01: 1900 588 803 – 102</p>
+        <p>Hotline 02: 024.2283.0555</p>
+        <p>Email: gochoctap.odin103tqv@gmail.com</p>
+        <p>Cảm ơn bạn đã lựa chọn ODIN!</p>
+    </div>
+</div>
+</body>
+</html>

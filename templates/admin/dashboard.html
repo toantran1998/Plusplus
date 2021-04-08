@@ -1,0 +1,247 @@
+{% load i18n static jazzmin admin_urls %}
+{% load i18n static jazzmin admin_urls bootstrap4 %}
+{% bootstrap_css %}         {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <style>
+        #revenue-chart1, #revenue-chart2 {
+            display: none !important;
+        }
+    </style>
+
+    <script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+            {#Get header data#}
+            $.ajax({
+                url: '/admin/dashboard-header-data',
+                dataType: 'json',
+                success: function (data) {
+                    if (data) {
+                        $('#number_users').text(data.number_users);
+                        $('#number_classes').text(data.number_classes);
+                        $('#number_students').text(data.number_students);
+                        $('#number_teachers').text(data.number_teachers);
+                        $('#number_contracts').text(data.number_contracts);
+                        $('#sum_remain_amount').text(data.sum_remain_amount);
+                        $('#number_revenues').text(data.number_revenues);
+                        $('#number_students_statics').text(data.number_students_statics);
+                        $('#number_study_shift_statics').text(data.number_study_shift_statics);
+                        $('#number_started_classes').text(data.number_started_classes);
+                        $('#sum_discount').text(data.sum_discount);
+                    }
+                }
+            });
+
+            $('iframe').height($(window).width() / 2.5);
+            $(window).resize(function () {
+                console.log("reissize");
+                $('iframe').height($(window).width() / 2.5);
+            });
+        });
+    </script>
+</head>
+<body>
+<section class="content">
+    <div class="">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-blue">
+                    <div class="inner">
+                        <h4 id="number_users" class="currency">0</h4>
+                        <p>Tổng người dùng</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <a href="/admin/user/authuser/" class="small-box-footer">Xem thêm <i
+                            class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-info">
+                    <div class="inner">
+                        <h4 id="number_students" class="currency">0</h4>
+                        <p>Tổng sinh viên</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <a href="/admin/user/student/" class="small-box-footer">Xem thêm <i
+                            class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-success">
+                    <div class="inner">
+                        <h4 id="number_teachers" class="currency">0</h4>
+                        <p>Tổng giáo viên</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <a href="/admin/user/teacher/" class="small-box-footer">Xem thêm <i
+                            class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-warning">
+                    <div class="inner">
+                        <h4 id="number_classes" class="currency">0</h4>
+                        <p>Tổng lớp học</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-archway"></i>
+                    </div>
+                    <a href="/admin/centre/classes/" class="small-box-footer">Xem thêm <i
+                            class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <div class="col-sm-4 col-xs-12">
+                <!-- small box -->
+                <div class="small-box bg-gradient-navy">
+                    <div class="inner">
+                        <h4 id="number_students_statics" class="currency">0</h4>
+                        <p>Tổng SV mới/Tổng SV hoàn phí/Tổng SV chờ lớp/Tổng SV đang học/Tổng SV tốt nghiệp</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <a href="/admin/user/student/" class="small-box-footer">Xem thêm <i
+                            class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <div class="col-sm-4 col-xs-12">
+                <!-- small box -->
+                <div class="small-box bg-fuchsia">
+                    <div class="inner">
+                        <h4 id="number_started_classes" class="currency">0</h4>
+                        <p>Tổng lớp đã khai giảng</p><br>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-archway"></i>
+                    </div>
+                    <a href="/admin/centre/classes/" class="small-box-footer">Xem thêm <i
+                            class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <div class="col-sm-4 col-xs-12">
+                <!-- small box -->
+                <div class="small-box bg-gradient-cyan">
+                    <div class="inner">
+                        <h4 id="number_study_shift_statics" class="currency">0</h4>
+                        <p>Tổng buổi học đã hoàn thành/Tổng buổi học còn phải hoàn thành</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-calendar"></i>
+                    </div>
+                    <a href="/admin/centre/classes/" class="small-box-footer">Xem thêm <i
+                            class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-4 col-6">
+                <!-- small box -->
+                <div class="small-box bg-gray-light">
+                    <div class="inner">
+                        <h4 id="number_contracts" class="currency">0</h4>
+                        <p>Tổng hợp đồng</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-file-contract"></i>
+                    </div>
+                    <a href="/admin/finance/studentdebt/" class="small-box-footer">Xem thêm <i
+                            class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-6">
+                <!-- small box -->
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h4 id="sum_remain_amount" class="currency">0</h4>
+                        <p>Tổng tiền nợ phải thu</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <a href="/admin/finance/studentdebt/" class="small-box-footer">Xem thêm <i
+                            class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-6">
+                <!-- small box -->
+                <div class="small-box bg-pink">
+                    <div class="inner">
+                        <h4 id="sum_discount" class="currency">0</h4>
+                        <p>Tổng giảm giá</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <a href="/admin/finance/studentdebt/" class="small-box-footer">Xem thêm <i
+                            class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-6">
+                <!-- small box -->
+                <div class="small-box bg-purple">
+                    <div class="inner">
+                        <h4 id="number_revenues" class="currency">0</h4>
+                        <p>Tổng doanh thu</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-money-check-alt"></i>
+                    </div>
+                    <a href="/admin/finance/studentdebt/" class="small-box-footer">Xem thêm <i
+                            class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
+        </div>
+        <!-- /.row -->
+        <!-- Main row -->
+        <!-- Left col -->
+        <div class="row">
+            <iframe class="chart col-12"
+                    src="{% url 'view_chart' %}?chart_type=REVENUE_CHART">
+            </iframe>
+        </div>
+        <div class="row">
+            <iframe class="chart col-12"
+                    src="{% url 'view_chart' %}?chart_type=USER_CHART">
+            </iframe>
+        </div>
+        <div class="row">
+            <iframe class="chart col-12"
+                    src="{% url 'view_chart' %}?chart_type=STUDENT_CHART">
+            </iframe>
+        </div>
+        <div class="row">
+            <iframe class="chart col-12"
+                    src="{% url 'view_chart' %}?chart_type=STUDY_SHIFT_CHART">
+            </iframe>
+        </div>
+        <!-- /.Left col -->
+        <!-- /.row (main row) -->
+    </div><!-- /.container-fluid -->
+</section>
+</body>

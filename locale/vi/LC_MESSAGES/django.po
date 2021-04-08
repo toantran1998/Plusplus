@@ -1,0 +1,5 @@
+msgid "Home"
+msgstr "Nhà"
+
+msgid "View site"
+msgstr "Nhà"
