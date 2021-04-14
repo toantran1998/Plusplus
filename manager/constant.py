@@ -11,13 +11,14 @@ CENTRE_COLORS = ["#6495ED", "#9FE2BF", "#40E0D0", "#CCCCFF", "#CD5C5C", "#E9967A
 
 CHOICE_EMPTY = [('', '---------')]
 
-STUDY_SHIFT_CHOICES = [(1, 'Ca 1 (9h-10h30)'), (2, 'Ca 2 (14h-15h30)'),
-                       (3, 'Ca 3 (18h-19h30)'), (4, 'Ca 4 (19h30-21h)')]
+STUDY_SHIFT_CHOICES = [(1, 'Ca 1 (19h-21h)'), (2, 'Ca 2 (19h30-21h30)'),
+                       (3, 'Ca 3 (18h-20h)'), (4, 'Ca 4 (18h30-21h30)'),
+                       (5, 'Ca 5 (21h-23h)'), (6, 'Ca 6 (20h-22h)')]
 
 
 COURSES_INFO = {
-    'BBST': {'name': 'New BBST', 'des': 'Nắm được tối thiểu 85% kiến thức phát âm và ngữ pháp cơ bản'},
-    'GT': {'name': 'Giao tiếp', 'des': 'Có thể trao đổi về các chủ đề quen thuộc với người nước ngoài'},
+    'Python Core': {'name': 'Python Core', 'des': 'Nắm được tối thiểu 85% kiến thức cơ bản'},
+    'Java Core': {'name': 'Java Core', 'des': 'Nắm được tối thiểu 85% kiến thức cơ bản'},
     'TO1': {'name': 'TO1', 'des': 'TOEIC 450'},
     'TO2': {'name': 'TO2', 'des': 'TOEIC 750'},
     'IE1': {'name': 'IE1', 'des': 'IELTS 3.5'},

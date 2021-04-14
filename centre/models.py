@@ -93,7 +93,7 @@ class Classes(models.Model):
     course = models.ForeignKey(Course, on_delete=models.PROTECT, null=True, blank=True, verbose_name=_('Khóa học'), default=None)
     code = models.CharField(_('Mã lớp học'), max_length=255, unique=True, default=None, null=True, blank=True)
     name = models.CharField(_('Tên lớp học'), max_length=255)
-    day_in_week = models.IntegerField(_('Lịch học'), choices=[(1, 'Thứ 2-5'), (2, 'Thứ 3-6'), (3, 'Thứ 4-7')], default=None)
+    day_in_week = models.IntegerField(_('Lịch học'), choices=[(1, 'Thứ 2-5'), (2, 'Thứ 3-6'), (3, 'Thứ 4-7'),(4, 'Thứ 2-4'),(5, 'Thứ 2-6'),(6, 'Thứ 2-7'),(7, 'Thứ 3-5'),(8, 'Thứ 3-7'),(9, 'Thứ 3-CN'),(10, 'Thứ 4-6'),(11, 'Thứ 4-CN'),(12, 'Thứ 5-7'),(13, 'Thứ 5-CN'),(14, 'Thứ 6-CN')], default=None)
     start_date = models.DateField(_('Ngày khai giảng'), null=True, default=None)
     study_shift_select = models.IntegerField(_('Ca học'), default=None, choices=STUDY_SHIFT_CHOICES)
     end_date = models.DateField(_('Ngày kết thúc'), default=None, null=True, blank=True)

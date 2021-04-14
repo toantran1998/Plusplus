@@ -18,8 +18,8 @@ from finance.models import StudentDebt, Payment, StudentSendPaymentRequest, Rewa
 from manager.constant import CENTRE_COLORS, GROUP
 from manager.utils import date_format, currency, get_list_year_month, get_random_string, create_contract_info, \
     create_receipt_info
-# from message.views import send_email_create_user_success, send_email_to_user, send_notifications, \
-#     send_inform_approve_payment, send_inform_confirm_payment, send_inform_cancel_payment
+from message.views import send_email_create_user_success, send_email_to_user, send_notifications, \
+    send_inform_approve_payment, send_inform_confirm_payment, send_inform_cancel_payment
 from user.models import AuthUser, Student
 
 

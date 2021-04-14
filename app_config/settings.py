@@ -29,7 +29,7 @@ ALLOWED_HOSTS = ['*']
 JAZZMIN_SETTINGS = {
     # title of the window
     "site_title": "PlusPlus Academy",
-    "site_bar_title": "PlusPlus Language",
+    "site_bar_title": "PlusPlus Academy",
     # Title on the brand, and the login screen (19 chars max)
     "site_header": "PlusPlus Academy",
     # Welcome text on the login screen
