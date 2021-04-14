@@ -14,7 +14,7 @@ from manager.utils import create_user_label
 
 
 class AuthUser(AbstractUser):
-    full_name = models.CharField(_('Họ và tên'), max_length=150, default=None)
+    full_name = models.CharField(_('Họ và tên'), max_length=150, default=None,null=True, blank=True)
     first_name = models.CharField(editable=False, default=None, null=True, blank=True, max_length=150)
     last_name = models.CharField(editable=False, default=None, null=True, blank=True, max_length=150)
     username = models.CharField(
@@ -56,7 +56,7 @@ class AuthUser(AbstractUser):
 
     address = models.CharField(_('Địa chỉ'), max_length=255, null=True, blank=True)
 
-    groups = models.ForeignKey(Group, on_delete=models.PROTECT, null=True, blank=True, verbose_name=_('Vai trò'), default=5)
+    groups = models.ForeignKey(Group, on_delete=models.PROTECT, null=True, blank=True, verbose_name=_('Vai trò'), default=None)
 
     centre = models.ForeignKey('centre.Centre', on_delete=models.PROTECT, verbose_name=_('Trung tâm'), default=None,
                                null=True, blank=True)

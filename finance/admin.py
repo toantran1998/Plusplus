@@ -52,7 +52,7 @@ class StudentDebtAdmin(BaseModelAdmin):
                     , "get_student_phone", "get_origin_amount", "get_paid_amount_total", "get_rest_amount", "reward"
                     , "contract_state", "print_receipt", "print_contract")
     list_filter = (("student__user__full_name", custom_titled_filter('Tên HV')),
-                   ("student__user__phone", custom_titled_filter('SĐT HV')))
+                   ("student__user__phone", custom_titled_filter('SĐT HV')),("rest_amount", custom_titled_filter('Còn Nợ')))
     search_fields = ("title",
                      "course__code", "course__name",
                      "student__user__full_name", "student__user__phone", "student__user__email"

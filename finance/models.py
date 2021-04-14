@@ -41,13 +41,10 @@ class StudentDebt(models.Model):
     student = models.ForeignKey('user.Student', on_delete=models.PROTECT, verbose_name=_('Học viên'))
     reward = models.ForeignKey('finance.Reward', on_delete=models.PROTECT, verbose_name=_('Ưu đãi'), default=None, null=True, blank=True)
     student_level = models.IntegerField(_('Trình độ hiện tại'), null=True, blank=True,
-                                        choices=[(1, 'BB'),
-                                                 (2, 'C'),
-                                                 (3, 'IE1'),
-                                                 (4, 'IE2'),
-                                                 (5, 'IE3'),
-                                                 (6, 'TO1'),
-                                                 (7, 'TO2')], default=None)
+                                        choices=[(1, 'Cơ bản '),
+                                                 (2, 'Đã học qua Python Core'),
+                                                 (3, 'Đã học qua Java Core'),
+                                                ], default=None)
     # student_state = models.IntegerField(_('Trạng thái HV'), null=True, blank=True,
     #                                     choices=[(1, 'Xếp lớp'),
     #                                              (2, 'Nhận lớp'),
