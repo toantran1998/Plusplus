@@ -27,10 +27,10 @@ from centre.views import task_students_list, get_default_study_shift_session_dat
 from finance.views import view_student_receipt, view_student_contract, view_dashboard_chart, get_revenue_data_api, \
     change_payment_request_state
 from manager.sites import CustomAdminSite
-from manager.views import reset_password, get_dashboard_header_data, import_students, student_register, \
-    get_reward_by_code, get_classes_by_centre_and_course, get_study_shifts_by_date_range_api, get_must_pay_amount_api, \
-    html_to_pdf, download_pdf
-from message.views import send_token_api, send_message_api, count_unread_messages_api, read_message_api
+# from manager.views import reset_password, get_dashboard_header_data, import_students, student_register, \
+#     get_reward_by_code, get_classes_by_centre_and_course, get_study_shifts_by_date_range_api, get_must_pay_amount_api, \
+#     html_to_pdf, download_pdf
+# from message.views import send_token_api, send_message_api, count_unread_messages_api, read_message_api
 from user.views import get_users_chart_data_api, get_students_chart_data_api, get_study_shift_chart_data_api
 
 router = DefaultRouter()
@@ -44,33 +44,33 @@ urlpatterns = [
     url('admin/student/receipt/', view_student_receipt, name='view_student_receipt'),
     url('admin/student/contract/', view_student_contract, name='view_student_contract'),
     url('admin/view/chart/', view_dashboard_chart, name='view_chart'),
-    url('admin/send-token/', send_token_api, name='send-token-api'),
-    url('admin/send-message/', send_message_api, name='send-message-api'),
-    url('admin/count-unread-message/', count_unread_messages_api, name='count-unread-message'),
-    url('admin/read-message/', read_message_api, name='read_message_api'),
-    url('admin/student/import/', import_students, name='import_students'),
+    # url('admin/send-token/', send_token_api, name='send-token-api'),
+    # url('admin/send-message/', send_message_api, name='send-message-api'),
+    # url('admin/count-unread-message/', count_unread_messages_api, name='count-unread-message'),
+    # url('admin/read-message/', read_message_api, name='read_message_api'),
+    # url('admin/student/import/', import_students, name='import_students'),
     url('admin/task-student-list/', task_students_list, name='task_students_list'),
     url('admin/study-shift/default-session-date', get_default_study_shift_session_date, name='default_study_shift_session_date'),
-    url('student/register/', student_register, name='student_register'),
-    url('reward/detail/', get_reward_by_code, name='reward_detail'),
-    url('classes/list-by-centre-course/', get_classes_by_centre_and_course, name='classes_by_centre_course'),
-    url('admin/study_shifts_by_date_range_api/', get_study_shifts_by_date_range_api, name='study_shifts_by_date_range_api'),
+    # url('student/register/', student_register, name='student_register'),
+    # url('reward/detail/', get_reward_by_code, name='reward_detail'),
+    # url('classes/list-by-centre-course/', get_classes_by_centre_and_course, name='classes_by_centre_course'),
+    # url('admin/study_shifts_by_date_range_api/', get_study_shifts_by_date_range_api, name='study_shifts_by_date_range_api'),
     url('admin/view_study_shift_schedule/', view_study_shift_schedule, name='view_study_shift_schedule'),
     url('admin/get_classes_api/', get_classes_api, name='get_classes_api'),
-    url('admin/get_must_pay_amount_api/', get_must_pay_amount_api, name='get_must_pay_amount_api'),
+    # url('admin/get_must_pay_amount_api/', get_must_pay_amount_api, name='get_must_pay_amount_api'),
     url('student/payment-request/state/change/', change_payment_request_state, name='payment_request_state_change'),
-    url('admin/html-to-pdf', download_pdf, name='download_pdf'),
+    # url('admin/html-to-pdf', download_pdf, name='download_pdf'),
 
-    path('admin/dashboard-header-data', get_dashboard_header_data, name='dashboard_header_data'),
+    # path('admin/dashboard-header-data', get_dashboard_header_data, name='dashboard_header_data'),
     path('admin/fetch-revenue-data', get_revenue_data_api, name='fetch_revenue_data'),
     path('admin/users-chart-data-api', get_users_chart_data_api, name='users-chart-data-api'),
     path('admin/students-chart-data-api', get_students_chart_data_api, name='students-chart-data-api'),
     path('admin/study-shift-chart-data-api', get_study_shift_chart_data_api, name='students-chart-data-api'),
-    path(
-        'admin/password_reset/',
-        reset_password,
-        name='admin_password_reset',
-    ),
+    # path(
+    #     'admin/password_reset/',
+    #     reset_password,
+    #     name='admin_password_reset',
+    # ),
     path(
         'admin/password_reset/done/',
         auth_views.PasswordResetDoneView.as_view(),

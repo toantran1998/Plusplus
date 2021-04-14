@@ -25,8 +25,8 @@ from manager.constant import GROUP
 from manager.form import RegistrationForm
 from manager.utils import currency, get_random_string, dd_mm_yyyy_to_date, currency_to_int, calculate_must_pay_amount, \
     html_to_pdf
-from message.views import send_email_reset_password, send_email_to_user, send_bulk_emails, send_notifications, \
-    send_inform_new_request_register, send_inform_new_request_register_received
+# from message.views import send_email_reset_password, send_email_to_user, send_bulk_emails, send_notifications, \
+#     send_inform_new_request_register, send_inform_new_request_register_received
 from user.models import AuthUser, Student, Teacher
 
 

@@ -16,7 +16,7 @@ from finance.views import apply_student_debt
 from manager.admin import BaseModelAdmin, BaseTabularInline
 from manager.constant import CHOICE_EMPTY, GROUP
 from manager.utils import currency, custom_titled_filter
-from message.views import send_inform_has_new_payment_request
+# from message.views import send_inform_has_new_payment_request
 from user.models import Student, BusinessEmployee
 
 

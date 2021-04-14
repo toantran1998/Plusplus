@@ -15,7 +15,7 @@ from manager.admin import BaseModelAdmin, BaseTabularInline, BaseStackedInline
 from manager.constant import GROUP
 from manager.utils import get_random_string, date_format, custom_titled_filter, str_to_int, \
     get_parent_object_from_request
-from message.views import send_email_create_user_success
+# from message.views import send_email_create_user_success
 from user.models import Student, Teacher, Receptionist, StudentCare, AuthUser, Commendation, Tests, StudentTestResult, \
     CommendationStudent, BusinessEmployee
 
