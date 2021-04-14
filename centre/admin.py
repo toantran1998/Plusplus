@@ -15,7 +15,7 @@ from centre.models import ClassRoom, Centre, StudyShift, StudyShiftTeacher, Stud
 from manager.admin import BaseModelAdmin, BaseTabularInline
 from manager.constant import GROUP, CHOICE_EMPTY
 from manager.utils import date_format, get_parent_object_from_request, currency
-# from message.views import send_inform_join_classes_to_teacher
+from message.views import send_inform_join_classes_to_teacher
 from user.models import AuthUser, Student
 
 
@@ -959,8 +959,8 @@ class ClassesAdmin(BaseModelAdmin):
 
         super(ClassesAdmin, self).save_related(request, form, formsets, change)
 
-        # for user in add_teachers:
-        #     send_inform_join_classes_to_teacher(user, cls)
+        for user in add_teachers:
+            send_inform_join_classes_to_teacher(user, cls)
 
         if not cls.waiting_flag:
             # Đối với sinh viên đã tham gia lớp và chưa hoàn thành => Cần add các sv đó vào các buổi học của lớp học
