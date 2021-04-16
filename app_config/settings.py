@@ -283,7 +283,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # MAIL HOST INFO:
 email_address = os.environ.get("EMAIL_ADDRESS", default='ODIN Language Academy <noreply@odinlanguage.com>')
-email_password = os.environ.get("EMAIL_PASSWORD", default='[E?JXa6F8XSD')
+email_password = os.environ.get("EMAIL_PASSWORD", default='8XSD')
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'pro17.emailserver.vn'
