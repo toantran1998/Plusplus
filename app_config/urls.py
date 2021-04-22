@@ -66,26 +66,10 @@ urlpatterns = [
     path('admin/users-chart-data-api', get_users_chart_data_api, name='users-chart-data-api'),
     path('admin/students-chart-data-api', get_students_chart_data_api, name='students-chart-data-api'),
     path('admin/study-shift-chart-data-api', get_study_shift_chart_data_api, name='students-chart-data-api'),
-    path(
-        'admin/password_reset/',
-        reset_password,
-        name='admin_password_reset',
-    ),
-    path(
-        'admin/password_reset/done/',
-        auth_views.PasswordResetDoneView.as_view(),
-        name='password_reset_done',
-    ),
-    path(
-        'reset/<uidb64>/<token>/',
-        auth_views.PasswordResetConfirmView.as_view(),
-        name='password_reset_confirm',
-    ),
-    path(
-        'reset/done/',
-        auth_views.PasswordResetCompleteView.as_view(),
-        name='password_reset_complete',
-    ),
+    path('admin/password_reset/', reset_password,name='admin_password_reset'),
+    path('admin/password_reset/done/', auth_views.PasswordResetDoneView.as_view(),name='password_reset_done'),
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    path('reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
 ]
 
 admin.site.site_header = 'Quản lý trung tâm'

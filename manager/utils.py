@@ -151,7 +151,9 @@ def create_contract_info(student_debt):
     course_arr = student_debt.course_code.split("_")
     course_info = ''
     for c in course_arr:
+
         course = COURSES_INFO[c]
+
         content = "<tr><td>" + course['name'] + "</td><td>" + course['des'] + "</td></tr>"
         course_info = course_info + content
     student_debt.course_info = format_html(course_info)
