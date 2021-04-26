@@ -130,7 +130,7 @@ class Student(models.Model):
     learning_purpose = models.TextField(_('Mục đích học'), max_length=255, null=True, blank=True)
     free_to_test = models.CharField(_('Lịch dự kiến thi'), max_length=255, null=True, blank=True)
     free_to_learn = models.CharField(_('Lịch rảnh'), max_length=255, null=True, blank=True)
-    how_to_know_odin = models.TextField(_('Bạn biết odin thông qua kênh nào?'), max_length=255, null=True, blank=True)
+    how_to_know_odin = models.TextField(_('Bạn biết Plusplus thông qua kênh nào?'), max_length=255, null=True, blank=True)
     created_user = models.ForeignKey(AuthUser, default=None, null=True, blank=True, related_name='student_create_user_set',
                                      on_delete=models.PROTECT,  verbose_name=_('Người tạo'))
     updated_user = models.ForeignKey(AuthUser, default=None, null=True, blank=True, editable=True,
