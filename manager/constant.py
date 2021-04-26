@@ -27,4 +27,7 @@ COURSES_INFO = {
     'DLEAOL' : {'name':'Deep learning ', 'des': 'Sử dụng thành thạo ngôn ngữ lập trình Python các tool, libraries, framework phục vụ cho lập trình AI. Hiểu và áp dụng hiệu quả các thuật toán, Framework và công nghệ Machine Learning khác nhau cho các vấn đề, yêu cầu khác nhau trong thực tế'},
     'AIFLOL': {'name':'AI FULL lộ trình', 'des': 'Bạn sẽ được học và cam kết đầu ra từ khóa Python core đến khóa Deep learning'},
     'TAUTEOL': {'name':'Tự động test với Python', 'des': 'Lập trình Python Cơ bản. Hiểu cấu trúc Selenium Automation Frameworks. Làm việc với Selenium WebDriver Automation sử dụng Python. Thực hiện tự động hóa các Web Application trên Internet bằng Selenium. Viết code trên Python để thiết kế Selenium Testcase. Thực hiện các dự án Selenium Automation Project. Ứng tuyển vào vị trí Selenium Automation Fresher Tester'},
+    'FEVJOL': {'name':'Lập trình Web với VueJS', 'des': 'Dành cho người biết FE cơ bản'},
+    'CCOBOL': {'name':'Lập trình C cơ bản', 'des': 'Dành cho người mới'},
+    'FERJOL': {'name':'Lập trình Web với ReactJS', 'des': 'Dành cho người biết FE cơ bản'},
 }

@@ -109,8 +109,11 @@ $(document).ready(function() {
             {"id":6, "code":"PYWEOL", "name":"Python Fullstack Web", "cost":9000000, "study_shift_count":50, "night_cost":9000000, "daytime_cost":9000000},
             {"id":7, "code":"DASCOL", "name":"Data Science", "cost":10750000, "study_shift_count":40, "night_cost":10750000, "daytime_cost":10750000},
             {"id":8, "code":"DLEAOL", "name":"Deep learning", "cost":8000000, "study_shift_count":32, "night_cost":8000000, "daytime_cost":8000000},
-            {"id":10, "code":"AIFLOL", "name":"AI FULL lộ trình", "cost":15000000, "study_shift_count":80, "night_cost":15000000, "daytime_cost":15000000},
-            {"id":11, "code":"TAUTEOL", "name":"Auto Test with Python", "cost":4500000, "study_shift_count":25, "night_cost":4500000, "daytime_cost":4500000}
+            {"id":9, "code":"AIFLOL", "name":"AI FULL lộ trình", "cost":15000000, "study_shift_count":80, "night_cost":15000000, "daytime_cost":15000000},
+            {"id":10, "code":"TAUTEOL", "name":"Auto Test with Python", "cost":4500000, "study_shift_count":25, "night_cost":4500000, "daytime_cost":4500000},
+            {"id":11, "code":"FEVJOL", "name":"Lập trình Web với VueJS", "cost":3250000, "study_shift_count":20, "night_cost":3250000, "daytime_cost":3250000}
+            {"id":12, "code":"CCOBOL", "name":"Lập trình C cơ bản", "cost":	990000, "study_shift_count":10, "night_cost":990000, "daytime_cost":990000}
+            {"id":13, "code":"FERJOL", "name":"Lập trình Web với ReactJS", "cost":2500000, "study_shift_count":15, "night_cost":2500000, "daytime_cost":2500000}
         ]
 
         const STUDY_SCHEDULE = {
