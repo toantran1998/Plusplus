@@ -62,23 +62,31 @@ $(document).ready(function() {
 
         $("#id_study_shift_select").on("change", function () {
             if ($studyShiftSelect.val() === "1") {
-                $fromTime.val("9:00");
-                $toTime.val("10:30");
+                $fromTime.val("19:00");
+                $toTime.val("21:00");
             }
 
             if ($studyShiftSelect.val() === "2") {
-                $fromTime.val("14:00");
-                $toTime.val("15:30");
+                $fromTime.val("19:30");
+                $toTime.val("21:30");
             }
 
             if ($studyShiftSelect.val() === "3") {
                 $fromTime.val("18:00");
-                $toTime.val("19:30");
+                $toTime.val("20:00");
             }
 
             if ($studyShiftSelect.val() === "4") {
-                $fromTime.val("19:30");
-                $toTime.val("21:00");
+                $fromTime.val("18:30");
+                $toTime.val("21:30");
+            }
+            if ($studyShiftSelect.val() === "5") {
+                $fromTime.val("21:00");
+                $toTime.val("23:00");
+            }
+            if ($studyShiftSelect.val() === "6") {
+                $fromTime.val("20:00");
+                $toTime.val("22:00");
             }
         });
     }
@@ -93,21 +101,16 @@ $(document).ready(function() {
         })
         const COURSE_LIST = [
             {},
-            {"id":1, "code":"BBST", "name":"NEW BBST", "cost":4600000, "study_shift_count":25, "night_cost":4600000, "daytime_cost":4140000},
-            {"id":2, "code":"GT", "name":"Giao ti\u1ebfp", "cost":7000000, "study_shift_count":25, "night_cost":7000000, "daytime_cost":6300000},
-            {"id":3, "code":"IE1", "name":"IELTS 3.5", "cost":7300000, "study_shift_count":25, "night_cost":7300000, "daytime_cost":6570000},
-            {"id":4, "code":"IE2", "name":"IELTS 5.0", "cost":8400000, "study_shift_count":35, "night_cost":8400000, "daytime_cost":7560000},
-            {"id":5, "code":"IE3", "name":"IELTS 6.5", "cost":10900000, "study_shift_count":35, "night_cost":10900000, "daytime_cost":9810000},
-            {"id":6, "code":"BBST_GT", "name":"BBST + Giao ti\u1ebfp", "cost":11600000, "study_shift_count":50, "night_cost":11600000, "daytime_cost":10440000},
-            {"id":7, "code":"GT_IE1", "name":"Giao ti\u1ebfp + IE1", "cost":14300000, "study_shift_count":70, "night_cost":14300000, "daytime_cost":12870000},
-            {"id":8, "code":"IE1_IE2_IE3", "name":"IE1+IE2+IE3", "cost":26600000, "study_shift_count":95, "night_cost":23940000, "daytime_cost":21546000},
-            {"id":10, "code":"GT_IE1_IE2_IE3", "name":"Giao ti\u1ebfp + IE1 + IE2 + IE3", "cost":33600000, "study_shift_count":120, "night_cost":30240000, "daytime_cost":27216000},
-            {"id":11, "code":"BBST_GT_IE1", "name":"BBST + Giao ti\u1ebfp + IE1", "cost":18900000, "study_shift_count":75, "night_cost":17010000, "daytime_cost":15309000},
-            {"id":12, "code":"BBST_GT_IE1_IE2", "name":"BBST + Giao ti\u1ebfp + IE1 + IE2", "cost":23700000, "study_shift_count":110, "night_cost":24570000, "daytime_cost":22113000},
-            {"id":13, "code":"BBST_GT_IE1_IE2_IE3", "name":"BBST + Giao ti\u1ebfp + IE1 + IE2 + IE3", "cost":38200000, "study_shift_count":145, "night_cost":32470000, "daytime_cost":29223000},
-            {"id":14, "code":"BBST_GT_TO1", "name":"BBST + Giao ti\u1ebfp + TO1", "cost":14500000, "study_shift_count":75, "night_cost":14500000, "daytime_cost":13340000},
-            {"id":15, "code":"TO1", "name":"TOEIC 450", "cost":2900000, "study_shift_count":25, "night_cost":290000, "daytime_cost":2900000},
-            {"id":16, "code":"TO2", "name":"TOEIC 750", "cost":3900000, "study_shift_count":25, "night_cost":3900000, "daytime_cost":3900000}
+            {"id":1, "code":"JVCOOL", "name":"Java Core", "cost":1500000, "study_shift_count":12, "night_cost":1500000, "daytime_cost":1500000},
+            {"id":2, "code":"PYCOOL", "name":"Python Core", "cost":1500000, "study_shift_count":10, "night_cost":1500000, "daytime_cost":1500000},
+            {"id":3, "code":"FECOOL", "name":"Front-end Cơ Bản", "cost":1500000, "study_shift_count":12, "night_cost":1500000, "daytime_cost":1500000},
+            {"id":4, "code":"JVBAOL", "name":"Lập trình Java Backend", "cost":7200000, "study_shift_count":38, "night_cost":7200000, "daytime_cost":7200000},
+            {"id":5, "code":"JVFLOL", "name":"Lập trình Java Full- stack", "cost":9000000, "study_shift_count":50, "night_cost":9000000, "daytime_cost":9000000},
+            {"id":6, "code":"PYWEOL", "name":"Python Fullstack Web", "cost":9000000, "study_shift_count":50, "night_cost":9000000, "daytime_cost":9000000},
+            {"id":7, "code":"DASCOL", "name":"Data Science", "cost":10750000, "study_shift_count":40, "night_cost":10750000, "daytime_cost":10750000},
+            {"id":8, "code":"DLEAOL", "name":"Deep learning", "cost":8000000, "study_shift_count":32, "night_cost":8000000, "daytime_cost":8000000},
+            {"id":10, "code":"AIFLOL", "name":"AI FULL lộ trình", "cost":15000000, "study_shift_count":80, "night_cost":15000000, "daytime_cost":15000000},
+            {"id":11, "code":"TAUTEOL", "name":"Auto Test with Python", "cost":4500000, "study_shift_count":25, "night_cost":4500000, "daytime_cost":4500000}
         ]
 
         const STUDY_SCHEDULE = {

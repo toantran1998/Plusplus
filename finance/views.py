@@ -79,7 +79,7 @@ def create_or_update_student_info(request, req_pay, default_password=None, add_t
             user=user,
             created_user=request.user, updated_user=request.user
         )
-        user.user_code = "SV_" + str(student.id)
+        user.user_code = "PP" + str(student.id)
         if default_password:
             user.password = hashers.make_password(password=default_password)
         user.save()

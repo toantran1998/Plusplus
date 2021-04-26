@@ -27,6 +27,7 @@ class PaymentInlineFormSet(BaseInlineFormSet):
 
             student_debt = self.instance
             must_pay_amount = (1 - student_debt.discount_percent / 100) * student_debt.origin_amount
+            # must_pay_amount = (1 - student_debt.discount_percent / 100)
             sum_paid_amount = 0
             for form in self.forms:
                 if form.is_valid():
@@ -114,13 +115,13 @@ class StudentDebtAdmin(BaseModelAdmin):
 
     def print_receipt(self, obj):
         return format_html("<a href='{url}' target='_blank'>{url_display}</a>",
-                           url='/admin/student/receipt?student_debt_id=' + str(obj.id), url_display="Xem")
+                           url='/admin/student/receipt?student_debt_id=' + str(obj.id), url_display="Xem biên lai")
 
     print_receipt.short_description = "Hóa đơn"
 
     def print_contract(self, obj):
         return format_html("<a href='{url}' target='_blank'>{url_display}</a>",
-                           url='/admin/student/contract?student_debt_id=' + str(obj.id), url_display="Xem")
+                           url='/admin/student/contract?student_debt_id=' + str(obj.id), url_display="Xem hợp đồng")
 
     print_contract.short_description = "Hợp đồng"
 

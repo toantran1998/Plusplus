@@ -1,9 +1,10 @@
 from datetime import date, datetime
-
+import json
 from django.db.models import Count, F, Sum, Case, When, IntegerField
 from django.db.models.functions import ExtractYear, ExtractMonth
 from django.http import JsonResponse
 from django.shortcuts import render
+from django.core import serializers
 
 from centre.models import Centre, ClassRoom, ClassesStudents, StudyShiftStudent, StudyShift
 from manager.constant import GROUP, CENTRE_COLORS
@@ -174,3 +175,13 @@ def get_monthly_users_data(from_date, to_date):
             data.append(sum_amount)
         datasets.append({'label': USER_LABELS[i], 'backgroundColor': CENTRE_COLORS[i], 'data': data})
     return labels, datasets
+##toan add view teacher
+# def view_teacher(request):
+#     qs = AuthUser.objects.all().filter(groups_id=GROUP.TEACHER)
+#     data = serializers.serialize("json", qs)
+#     # data = json.dumps(list(qs))
+#     full_name=request.POST.get('full_name')
+#
+#
+#     return JsonResponse({'data':json.dumps(data)})
+##end
