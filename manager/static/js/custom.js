@@ -101,19 +101,23 @@ $(document).ready(function() {
         })
         const COURSE_LIST = [
             {},
-            {"id":1, "code":"JVCOOL", "name":"Java Core", "cost":1500000, "study_shift_count":12, "night_cost":1500000, "daytime_cost":1500000},
-            {"id":2, "code":"PYCOOL", "name":"Python Core", "cost":1500000, "study_shift_count":10, "night_cost":1500000, "daytime_cost":1500000},
-            {"id":3, "code":"FECOOL", "name":"Front-end Cơ Bản", "cost":1500000, "study_shift_count":12, "night_cost":1500000, "daytime_cost":1500000},
-            {"id":4, "code":"JVBAOL", "name":"Lập trình Java Backend", "cost":7200000, "study_shift_count":38, "night_cost":7200000, "daytime_cost":7200000},
-            {"id":5, "code":"JVFLOL", "name":"Lập trình Java Full- stack", "cost":9000000, "study_shift_count":50, "night_cost":9000000, "daytime_cost":9000000},
-            {"id":6, "code":"PYWEOL", "name":"Python Fullstack Web", "cost":9000000, "study_shift_count":50, "night_cost":9000000, "daytime_cost":9000000},
-            {"id":7, "code":"DASCOL", "name":"Data Science", "cost":10750000, "study_shift_count":40, "night_cost":10750000, "daytime_cost":10750000},
-            {"id":8, "code":"DLEAOL", "name":"Deep learning", "cost":8000000, "study_shift_count":32, "night_cost":8000000, "daytime_cost":8000000},
-            {"id":9, "code":"AIFLOL", "name":"AI FULL lộ trình", "cost":15000000, "study_shift_count":80, "night_cost":15000000, "daytime_cost":15000000},
-            {"id":10, "code":"TAUTEOL", "name":"Auto Test with Python", "cost":4500000, "study_shift_count":25, "night_cost":4500000, "daytime_cost":4500000},
-            {"id":11, "code":"FEVJOL", "name":"Lập trình Web với VueJS", "cost":3250000, "study_shift_count":20, "night_cost":3250000, "daytime_cost":3250000},
-            {"id":12, "code":"CCOBOL", "name":"Lập trình C cơ bản", "cost":	990000, "study_shift_count":10, "night_cost":990000, "daytime_cost":990000},
-            {"id":13, "code":"FERJOL", "name":"Lập trình Web với ReactJS", "cost":2500000, "study_shift_count":15, "night_cost":2500000, "daytime_cost":2500000}
+            {"id":1, "code":"FECOOL", "name":"Front-end Cơ Bản", "cost":1500000, "study_shift_count":12, "night_cost":1500000, "daytime_cost":1500000},
+            {"id":2, "code":"CCOBOL", "name":"Lập trình C cơ bản", "cost":	990000, "study_shift_count":10, "night_cost":990000, "daytime_cost":990000},
+            {"id":3, "code":"FERJOL", "name":"Lập trình Web với ReactJS", "cost":2500000, "study_shift_count":15, "night_cost":2500000, "daytime_cost":2500000},
+            {"id":4, "code":"FEVJOL", "name":"Lập trình Web với VueJS", "cost":3250000, "study_shift_count":20, "night_cost":3250000, "daytime_cost":3250000},
+            {"id":5, "code":"JVCOOL", "name":"Java Core", "cost":1500000, "study_shift_count":12, "night_cost":1500000, "daytime_cost":1500000},
+            {"id":6, "code":"JVBAOL", "name":"Lập trình Java Backend", "cost":7200000, "study_shift_count":38, "night_cost":7200000, "daytime_cost":7200000},
+            {"id":7, "code":"JVFLOL", "name":"Lập trình Java Full- stack", "cost":9000000, "study_shift_count":50, "night_cost":9000000, "daytime_cost":9000000},
+            {"id":8, "code":"PYCOOL", "name":"Python Core", "cost":1500000, "study_shift_count":10, "night_cost":1500000, "daytime_cost":1500000},
+            {"id":9, "code":"TAUTEOL", "name":"Auto Test with Python", "cost":4500000, "study_shift_count":25, "night_cost":4500000, "daytime_cost":4500000},
+            {"id":10, "code":"PYWEOL", "name":"Python Fullstack Web", "cost":9000000, "study_shift_count":50, "night_cost":9000000, "daytime_cost":9000000},
+            {"id":11, "code":"DASCOL", "name":"Data Science", "cost":10750000, "study_shift_count":40, "night_cost":10750000, "daytime_cost":10750000},
+            {"id":12, "code":"DLEAOL", "name":"Deep learning", "cost":8000000, "study_shift_count":32, "night_cost":8000000, "daytime_cost":8000000},
+            {"id":13, "code":"AIFLOL", "name":"AI FULL lộ trình", "cost":15000000, "study_shift_count":80, "night_cost":15000000, "daytime_cost":15000000}
+
+
+
+
         ]
 
         const STUDY_SCHEDULE = {
