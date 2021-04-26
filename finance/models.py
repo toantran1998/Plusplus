@@ -37,7 +37,7 @@ class Revenue(models.Model):
 
 class StudentDebt(models.Model):
     centre = models.ForeignKey('centre.Centre', on_delete=models.PROTECT, verbose_name=_('Trung tâm'), default=None, null=True, blank=True)
-    title = models.CharField(_('Ghi chú'), max_length=255, default=None,null=True, blank=True)
+    title = models.CharField(_('Mã người giới thiệu'), max_length=255, default=None,null=True, blank=True)
     student = models.ForeignKey('user.Student', on_delete=models.PROTECT, verbose_name=_('Học viên'))
     reward = models.ForeignKey('finance.Reward', on_delete=models.PROTECT, verbose_name=_('Ưu đãi'), default=None, null=True, blank=True)
     student_level = models.IntegerField(_('Trình độ hiện tại'), null=True, blank=True,

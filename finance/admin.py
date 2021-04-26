@@ -49,7 +49,7 @@ class PaymentInline(BaseTabularInline):
 
 @admin.register(StudentDebt)
 class StudentDebtAdmin(BaseModelAdmin):
-    list_display = ("id", "title_link", 'course', "get_student_name", "get_student_code", "get_student_email"
+    list_display = ("id", "title_link", 'course', "get_student_name", 'title',"get_student_code", "get_student_email"
                     , "get_student_phone", "get_origin_amount", "get_paid_amount_total", "get_rest_amount", "reward"
                     , "contract_state", "print_receipt", "print_contract")
     list_filter = (("student__user__full_name", custom_titled_filter('Tên HV')),
