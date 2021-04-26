@@ -88,9 +88,9 @@ class UserStudentAdminInline(BaseStackedInline):
 @admin.register(AuthUser)
 class UserAdmin(BaseModelAdmin):
     icon_name = 'person'
-    list_display = ("id", "username_link",'user_code', "full_name", "email", "phone", "groups", "is_active")
+    list_display = ("id", "username_link", "full_name", "email", "phone", "groups", "is_active")
     search_fields = ['username', 'full_name', 'user_code', 'email', "phone"]
-    fields = ("centre", "full_name",'user_code', "username", "email", "phone", "birth_day",
+    fields = ("centre", "full_name", "username", "email", "phone", "birth_day",
               "address", "date_joined", "is_active", "groups")
     change_readonly_fields = ("username", "date_joined", 'user_code',"groups")
     student_inlines = [UserStudentAdminInline]
