@@ -90,9 +90,9 @@ class StudentDebt(models.Model):
         verbose_name = _("Doanh thu")
         verbose_name_plural = _('Doanh thu')
         app_label = 'finance'
-
-    def __str__(self):
-        return self.title
+    #
+    # def __str__(self):
+    #     return self.title
 
     def student_name(self):
         return self.student.student_name

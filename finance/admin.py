@@ -142,7 +142,7 @@ class StudentDebtAdmin(BaseModelAdmin):
     # def get_payed_date(self, obj):
     #     return date_format(obj.completed_pay_date, DEFAULT_DATE_FORMAT)
 
-    title_link.short_description = _('Nội dung')
+    title_link.short_description = _('Mã người giới thiệu')
     # get_payed_date.short_description = _('Ngày trả')
     # get_payed_date.admin_order_field = 'payed_date'
     title_link.admin_order_field = 'title'
