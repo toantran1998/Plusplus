@@ -92,7 +92,7 @@ class UserAdmin(BaseModelAdmin):
     search_fields = ['username', 'full_name', 'user_code', 'email', "phone"]
     fields = ("centre", "full_name", "username", "email", "phone", "birth_day",
               "address", "date_joined", "is_active", "groups")
-    change_readonly_fields = ("username", "date_joined", 'user_code',"groups")
+    change_readonly_fields = ( "date_joined", 'user_code',"groups")
     student_inlines = [UserStudentAdminInline]
     inlines = []
     actions = ['lock_users', 'unlock_users']
