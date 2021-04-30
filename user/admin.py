@@ -149,23 +149,23 @@ class UserAdmin(BaseModelAdmin):
             # In case create teacher
             if obj.groups_id == GROUP.TEACHER:
                 teacher = Teacher.objects.create(user=obj, created_user=request.user, updated_user=request.user)
-                obj.user_code = "PP" + str(teacher.id).zfill(6)
+                obj.user_code = "GV" + str(teacher.id).zfill(6)
             # In case create receptionist
             elif obj.groups_id == GROUP.RECEPTIONIST:
                 receptions = Receptionist.objects.create(user=obj, created_user=request.user,
                                                          updated_user=request.user)
-                obj.user_code = "PP" + str(receptions.id).zfill(6)
+                obj.user_code = "LT" + str(receptions.id).zfill(6)
             # In case create student care
             elif obj.groups_id == GROUP.STUDENT_CARE:
                 student_care = StudentCare.objects.create(user=obj, created_user=request.user,
                                                           updated_user=request.user)
-                obj.user_code = "PP" + str(student_care.id).zfill(6)
+                obj.user_code = "CSHV" + str(student_care.id).zfill(6)
 
             # In case create business
             elif obj.groups_id == GROUP.BUSINESS:
                 business_employee = BusinessEmployee.objects.create(user=obj, created_user=request.user,
                                                           updated_user=request.user)
-                obj.user_code = "PP" + str(business_employee.id).zfill(6)
+                obj.user_code = "NVKD" + str(business_employee.id).zfill(6)
             super(UserAdmin, self).save_model(request, obj, form, change)
             send_email_create_user_success(to_user=obj,
                                            password=random_password,
