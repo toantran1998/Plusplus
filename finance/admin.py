@@ -58,7 +58,7 @@ class StudentDebtAdmin(BaseModelAdmin):
                      "course__code", "course__name",
                      "student__user__full_name", "student__user__phone", "student__user__email"
                      )
-    fields = ('course', 'study_schedule_select', 'student', 'student_level', 'origin_amount',
+    fields = ('course', 'study_schedule_select', 'day_in_week','student', 'student_level', 'origin_amount',
               'reward',
               'rest_amount', 'back_amount', 'back_reason', 'plan_date', 'completed_pay_date', 'gift',
               'collector', 'counselor',

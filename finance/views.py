@@ -269,10 +269,10 @@ def apply_student_debt(student_debt, course, owner, classes=None, add_to_classes
             # Get khóa tiếp theo nữa của sv này
             next_next_course_code = course_code_array[1]
 
-        # Trường hợp ko nhập thông tin classes => add sv vào lớp chờ mặc định là 2-5.
+        # Trường hợp ko nhập thông tin classes => add sv vào lớp chờ có ngày trong tuần được set trong công nợ.
         # Ngược lại => add sinh viên vào lớp mà sv đã đăng ký.
         if not classes:
-            classes = Classes.objects.get(course=course_id, day_in_week=1, centre=student_debt.student.user.centre, waiting_flag=True)
+            classes = Classes.objects.get(course=course_id, day_in_week=student_debt.day_in_week, centre=student_debt.student.user.centre, waiting_flag=True)
         class_student = ClassesStudents(classes=classes,
                                         student=student_debt.student, student_debt=student_debt,
                                         next_course_code=next_next_course_code,

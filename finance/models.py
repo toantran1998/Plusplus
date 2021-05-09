@@ -53,6 +53,11 @@ class StudentDebt(models.Model):
     #                                              (5, 'Rút quyền lợi')], default=None)
     course = models.ForeignKey('centre.Course', null=True, blank=True, verbose_name=_('Khóa học'), on_delete=models.PROTECT, default=None)
     study_schedule_select = models.IntegerField(_('Ca học'), default=1, choices=STUDY_SHIFT_CHOICES)
+    day_in_week = models.IntegerField(_('Lịch học'),
+                                      choices=[(1, 'Thứ 2-5'), (2, 'Thứ 3-6'), (3, 'Thứ 4-7'), (4, 'Thứ 2-4'),
+                                               (5, 'Thứ 2-6'), (6, 'Thứ 2-7'), (7, 'Thứ 3-5'), (8, 'Thứ 3-7'),
+                                               (9, 'Thứ 3-CN'), (10, 'Thứ 4-6'), (11, 'Thứ 4-CN'), (12, 'Thứ 5-7'),
+                                               (13, 'Thứ 5-CN'), (14, 'Thứ 6-CN')], default=None)
     origin_amount = models.IntegerField(_('Giá'), validators=[MinValueValidator(0)], default=0, null=True, blank=True)
     discount_percent = models.IntegerField(_('Giảm giá(%)'), validators=[MinValueValidator(0), MaxValueValidator(100)],
                                          default=0, editable=False)
