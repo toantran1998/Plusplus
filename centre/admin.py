@@ -731,8 +731,10 @@ class ClassesStudentInline(BaseTabularInline):
             parent_class = get_parent_object_from_request(self, request)
             if parent_class:
                 # Nếu có lớp chờ của khoá tương ứng => chọn ra những sv thuộc lớp chờ để làm dữ liệu input.
+                #toan sửa
                 wait_classes_list = Classes.objects.filter(course_id=parent_class.course_id,
-                                                      day_in_week=parent_class.day_in_week, centre=parent_class.centre, waiting_flag=True)
+                                                       centre=parent_class.centre, waiting_flag=True)
+                #end
                 if wait_classes_list.count() > 0:
                     waiting_classes = wait_classes_list[0]
                     # qs = super(ClassesStudents, self).get_queryset(request)
