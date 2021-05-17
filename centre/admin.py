@@ -732,17 +732,21 @@ class ClassesStudentInline(BaseTabularInline):
             if parent_class:
                 # Nếu có lớp chờ của khoá tương ứng => chọn ra những sv thuộc lớp chờ để làm dữ liệu input.
                 #toan sửa
-                wait_classes_list = Classes.objects.filter(course_id=parent_class.course_id,
+                wait_classes_list = Classes.objects.filter(
                                                        centre=parent_class.centre, waiting_flag=True)
-                #end
+
+                print(wait_classes_list)
                 if wait_classes_list.count() > 0:
-                    waiting_classes = wait_classes_list[0]
+                    waiting_classes_list = []
+                    for waiting_classes in wait_classes_list:
+                        waiting_classes_list.append(waiting_classes.id)
                     # qs = super(ClassesStudents, self).get_queryset(request)
                     # return qs.filter(classes_id=waiting_classes.id)
                     return Student.objects.filter(
                         id__in=ClassesStudents.objects.filter(
-                            Q(classes_id=parent_class.id) | Q(classes_id=waiting_classes.id)
+                            Q(classes_id=parent_class.id) | Q(classes_id__in=waiting_classes_list)
                         ).values_list('student_id'))
+                # end
 
     def has_add_permission(self, request, obj):
         return obj and obj.pk and not obj.waiting_flag
