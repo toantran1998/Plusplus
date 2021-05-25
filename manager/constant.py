@@ -30,5 +30,5 @@ COURSES_INFO = {
     'FEVJOL': {'name':'Lập trình Web với VueJS', 'des': 'Dành cho người biết FE cơ bản'},
     'CCOBOL': {'name':'Lập trình C cơ bản', 'des': 'Dành cho người mới'},
     'FERJOL': {'name':'Lập trình Web với ReactJS', 'des': 'Dành cho người biết FE cơ bản'},
-    'JV_Spring': {'name':'Java Spring', 'des': 'Dành cho người biết Java cơ bản'},
+    'JVSpring': {'name':'Java Spring', 'des': 'Dành cho người biết Java cơ bản'},
 }
