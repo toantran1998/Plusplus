@@ -114,7 +114,7 @@ $(document).ready(function() {
             {"id":11, "code":"DASCOL", "name":"Data Science", "cost":10750000, "study_shift_count":40, "night_cost":10750000, "daytime_cost":10750000},
             {"id":12, "code":"DLEAOL", "name":"Deep learning", "cost":8000000, "study_shift_count":32, "night_cost":8000000, "daytime_cost":8000000},
             {"id":13, "code":"AIFLOL", "name":"AI FULL lộ trình", "cost":15000000, "study_shift_count":80, "night_cost":15000000, "daytime_cost":15000000},
-            {"id":14, "code":"Java_ Spring", "name":"Java Spring", "cost":3900000, "study_shift_count":16, "night_cost":3900000, "daytime_cost":3900000}
+            {"id":14, "code":"JV_Spring", "name":"Java Spring", "cost":3900000, "study_shift_count":16, "night_cost":3900000, "daytime_cost":3900000}
         ]
 
         const STUDY_SCHEDULE = {
