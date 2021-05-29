@@ -1105,17 +1105,23 @@ def create_study_shifts(cls, study_shift_count, next_start_date, next_start_orde
     to_time = None
 
     if cls.study_shift_select == 1:
-        from_time = datetime.strptime("09:00", "%H:%M")
-        to_time = datetime.strptime("10:30", "%H:%M")
+        from_time = datetime.strptime("19:00", "%H:%M")
+        to_time = datetime.strptime("21:00", "%H:%M")
     elif cls.study_shift_select == 2:
-        from_time = datetime.strptime("14:00", "%H:%M")
-        to_time = datetime.strptime("15:30", "%H:%M")
+        from_time = datetime.strptime("19:30", "%H:%M")
+        to_time = datetime.strptime("21:30", "%H:%M")
     elif cls.study_shift_select == 3:
         from_time = datetime.strptime("18:00", "%H:%M")
-        to_time = datetime.strptime("19:30", "%H:%M")
+        to_time = datetime.strptime("20:00", "%H:%M")
     elif cls.study_shift_select == 4:
-        from_time = datetime.strptime("19:30", "%H:%M")
-        to_time = datetime.strptime("21:00", "%H:%M")
+        from_time = datetime.strptime("18:30", "%H:%M")
+        to_time = datetime.strptime("21:30", "%H:%M")
+    elif cls.study_shift_select == 5:
+        from_time = datetime.strptime("21:00", "%H:%M")
+        to_time = datetime.strptime("23:00", "%H:%M")
+    elif cls.study_shift_select == 6:
+        from_time = datetime.strptime("20:00", "%H:%M")
+        to_time = datetime.strptime("22:00", "%H:%M")
     for i in range(study_shift_count):
         study_shift = StudyShift(classes=cls, class_room_id=1, order_no=(i + next_start_order_no),
                                  session_date=next_start_date, study_shift_select=cls.study_shift_select,

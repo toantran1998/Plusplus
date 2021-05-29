@@ -45,7 +45,7 @@ class AuthUser(AbstractUser):
         #  Default password:12345@Qaz
         , default='pbkdf2_sha256$180000$8LyVdLFJgbEY$gCSdCqLYGy6qAOmMO4l5RkCBs/xLPsqI55RtQFDZhls='
         , help_text=password_validation.password_validators_help_text_html(), editable=False)
-    is_superuser = models.BooleanField('Is Super Admin', default=True, editable=True)
+    is_superuser = models.BooleanField('Is Super Admin', default= False, editable=True)
     is_staff = models.BooleanField(default=True, editable=False)
     is_active = models.BooleanField('Active', default=True, help_text=_(
         'Designates whether this user should be treated as active. '
