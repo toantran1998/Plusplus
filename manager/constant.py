@@ -12,7 +12,7 @@ CENTRE_COLORS = ["#6495ED", "#9FE2BF", "#40E0D0", "#CCCCFF", "#CD5C5C", "#E9967A
 CHOICE_EMPTY = [('', '---------')]
 
 STUDY_SHIFT_CHOICES = [(1, 'Ca 1 (19h-21h)'), (2, 'Ca 2 (19h30-21h30)'),
-                       (3, 'Ca 3 (18h-20h)'), (4, 'Ca 4 (18h30-21h30)'),
+                       (3, 'Ca 3 (18h-20h)'), (4, 'Ca 4 (18h30-20h30)'),
                        (5, 'Ca 5 (21h-23h)'), (6, 'Ca 6 (20h-22h)')]
 
 

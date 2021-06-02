@@ -1091,31 +1091,94 @@ def update_study_shifts(cls, create_user):
 
 
 # Get thời gian buổi học tiếp theo dựa trên thời gian của buổi hiện tại
-def get_next_start_date(current_start_date):
+def get_next_start_date(day_in_week, current_start_date):
     next_start_week_day = current_start_date.weekday()
-    # Tinh toan ngay tiep theo
-    if next_start_week_day <= 2:
+
+    a = [(1, 'Thứ 2-5'), (2, 'Thứ 3-6'), (3, 'Thứ 4-7'), (4, 'Thứ 2-4'), (5, 'Thứ 2-6'), (6, 'Thứ 2-7'), (7, 'Thứ 3-5'),
+         (8, 'Thứ 3-7'), (9, 'Thứ 3-CN'), (10, 'Thứ 4-6'), (11, 'Thứ 4-CN'), (12, 'Thứ 5-7'), (13, 'Thứ 5-CN'),
+         (14, 'Thứ 6-CN')]
+    # chon lich hoc
+    print(day_in_week)
+    if day_in_week <= 3:
+        if next_start_week_day <= 2:
+            return current_start_date + timedelta(days=3)
+        return current_start_date + timedelta(days=4)
+
+    if day_in_week ==4:
+        if next_start_week_day == 0:
+            return current_start_date + timedelta(days=2)
+        return current_start_date + timedelta(days=5)
+
+    if day_in_week == 5:
+        if next_start_week_day == 0:
+            return current_start_date + timedelta(days=4)
         return current_start_date + timedelta(days=3)
+    if day_in_week == 6:
+        if next_start_week_day == 2:
+            return current_start_date + timedelta(days=5)
+        return current_start_date + timedelta(days=2)
+    if day_in_week == 7:
+        if next_start_week_day == 1:
+            return current_start_date + timedelta(days=2)
+        return current_start_date + timedelta(days=5)
+    if day_in_week == 8:
+        if next_start_week_day == 1:
+            return current_start_date + timedelta(days=4)
+        return current_start_date + timedelta(days=3)
+    if day_in_week == 9:
+        if next_start_week_day == 1:
+            return current_start_date + timedelta(days=5)
+        return current_start_date + timedelta(days=2)
+    if day_in_week == 10:
+        if next_start_week_day == 2:
+            return current_start_date + timedelta(days=2)
+        return current_start_date + timedelta(days=5)
+    if day_in_week == 11:
+        if next_start_week_day == 2:
+            return current_start_date + timedelta(days=4)
+        return current_start_date + timedelta(days=3)
+    if day_in_week == 12:
+        if next_start_week_day == 3:
+            return current_start_date + timedelta(days=2)
+        return current_start_date + timedelta(days=5)
+    if day_in_week == 13:
+        if next_start_week_day == 3:
+            return current_start_date + timedelta(days=3)
+        return current_start_date + timedelta(days=4)
+    if day_in_week == 14:
+        if next_start_week_day == 4:
+            return current_start_date + timedelta(days=2)
+        return current_start_date + timedelta(days=5)
     return current_start_date + timedelta(days=4)
+    # Tinh toan ngay tiep theo
+    # if next_start_week_day <= 2:
+    #     return current_start_date + timedelta(days=3)
+    # return current_start_date + timedelta(days=4)
 
 
 # Tạo một số lượng buổi học
 def create_study_shifts(cls, study_shift_count, next_start_date, next_start_order_no, create_user):
     from_time = None
     to_time = None
-
+    # chon ca hoc
     if cls.study_shift_select == 1:
-        from_time = datetime.strptime("09:00", "%H:%M")
-        to_time = datetime.strptime("10:30", "%H:%M")
+        from_time = datetime.strptime("19:00", "%H:%M")
+        to_time = datetime.strptime("21:00", "%H:%M")
     elif cls.study_shift_select == 2:
-        from_time = datetime.strptime("14:00", "%H:%M")
-        to_time = datetime.strptime("15:30", "%H:%M")
+        from_time = datetime.strptime("19:30", "%H:%M")
+        to_time = datetime.strptime("21:30", "%H:%M")
     elif cls.study_shift_select == 3:
         from_time = datetime.strptime("18:00", "%H:%M")
-        to_time = datetime.strptime("19:30", "%H:%M")
+        to_time = datetime.strptime("20:00", "%H:%M")
     elif cls.study_shift_select == 4:
-        from_time = datetime.strptime("19:30", "%H:%M")
-        to_time = datetime.strptime("21:00", "%H:%M")
+        from_time = datetime.strptime("18:30", "%H:%M")
+        to_time = datetime.strptime("20:30", "%H:%M")
+    elif cls.study_shift_select == 5:
+        from_time = datetime.strptime("21:00", "%H:%M")
+        to_time = datetime.strptime("23:00", "%H:%M")
+    elif cls.study_shift_select == 6:
+        from_time = datetime.strptime("20:00", "%H:%M")
+        to_time = datetime.strptime("22:00", "%H:%M")
     for i in range(study_shift_count):
         study_shift = StudyShift(classes=cls, class_room_id=1, order_no=(i + next_start_order_no),
                                  session_date=next_start_date, study_shift_select=cls.study_shift_select,
@@ -1127,7 +1190,7 @@ def create_study_shifts(cls, study_shift_count, next_start_date, next_start_orde
         if i == study_shift_count - 1:
             cls.end_date = next_start_date
 
-        next_start_date = get_next_start_date(next_start_date)
+        next_start_date = get_next_start_date(cls.day_in_week, next_start_date)
 
     cls.save()
 
