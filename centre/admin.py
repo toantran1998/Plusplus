@@ -1094,9 +1094,6 @@ def update_study_shifts(cls, create_user):
 def get_next_start_date(day_in_week, current_start_date):
     next_start_week_day = current_start_date.weekday()
 
-    a = [(1, 'Thứ 2-5'), (2, 'Thứ 3-6'), (3, 'Thứ 4-7'), (4, 'Thứ 2-4'), (5, 'Thứ 2-6'), (6, 'Thứ 2-7'), (7, 'Thứ 3-5'),
-         (8, 'Thứ 3-7'), (9, 'Thứ 3-CN'), (10, 'Thứ 4-6'), (11, 'Thứ 4-CN'), (12, 'Thứ 5-7'), (13, 'Thứ 5-CN'),
-         (14, 'Thứ 6-CN')]
     # chon lich hoc
     print(day_in_week)
     if day_in_week <= 3:

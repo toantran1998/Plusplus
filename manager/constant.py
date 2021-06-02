@@ -16,6 +16,7 @@ STUDY_SHIFT_CHOICES = [(1, 'Ca 1 (19h-21h)'), (2, 'Ca 2 (19h30-21h30)'),
                        (5, 'Ca 5 (21h-23h)'), (6, 'Ca 6 (20h-22h)')]
 
 
+
 COURSES_INFO = {
     'JVCOOL': {'name':'Java Core', 'des': 'Nắm được tối thiểu 85% kiến thức lập trình cơ bản, có thể lập trình desktop, có thể xin thực tập tại các công ty phần mềm'},
     'PYCOOL': {'name':'Python Core', 'des': 'Nắm được tối thiểu 85% kiến thức lập trình cơ bản, có thể lập trình desktop, có thể xin thực tập tại các công ty phần mềm'},
