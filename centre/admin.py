@@ -1100,7 +1100,6 @@ def get_next_start_date(day_in_week, current_start_date):
         if next_start_week_day <= 2:
             return current_start_date + timedelta(days=3)
         return current_start_date + timedelta(days=4)
-
     if day_in_week ==4:
         if next_start_week_day == 0:
             return current_start_date + timedelta(days=2)
